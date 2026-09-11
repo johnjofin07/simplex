@@ -1,9 +1,11 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// TODO(owner): replace with the real domain once hosting is decided.
+// Hosted on GitHub Pages at https://johnjofin07.github.io/simplex/.
+// TODO(owner): when a custom domain is added, set site to that domain and remove base.
 export default defineConfig({
-  site: 'https://simplex-aluminium.example',
+  site: 'https://johnjofin07.github.io',
+  base: '/simplex',
   output: 'static',
   compressHTML: true,
   build: { inlineStylesheets: 'auto' },

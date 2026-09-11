@@ -14,7 +14,7 @@ export type IconName = 'tape' | 'workshop' | 'seal' | 'broom' | 'home' | 'kitche
 export const site = {
   name: 'Simplex Aluminium',
   wordmark: '/Simplex',
-  siteUrl: 'https://simplex-aluminium.example', // TODO(owner) real domain
+  siteUrl: 'https://johnjofin07.github.io/simplex/', // TODO(owner) real domain
   /** E.164, used in tel: links. */
   phone: '+15555550100', // TODO(owner) real phone number in E.164
   /** How the number is printed on the page. */

@@ -9,6 +9,7 @@ interface Props {
   description: string;
 }
 const { title, description } = Astro.props;
+const favicon = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`;
 
 // TODO(owner): the LocalBusiness record is built from placeholders in site.ts.
 const jsonLd = {
@@ -32,7 +33,7 @@ const jsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#e3e3de" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={favicon} type="image/svg+xml" />
     <link rel="canonical" href={site.siteUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
