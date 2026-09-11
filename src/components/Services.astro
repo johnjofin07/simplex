@@ -90,6 +90,12 @@ const cards = await Promise.all(
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
   }
+  /* Title, blurb and prompt each sit on their own line, left-aligned. */
+  .cap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
   .open {
     display: inline-flex;
     align-items: center;

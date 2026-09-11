@@ -6,7 +6,7 @@
 import type { ImageMetadata } from 'astro';
 import heroSky from '../assets/photos/hero-sky.jpg';
 import heroBuilding from '../assets/photos/hero-building.png';
-import facadeHospital from '../assets/photos/facade-hospital.jpg';
+import kitchenGreen from '../assets/photos/kitchen-green.jpg';
 import renderFins from '../assets/photos/render-fins.jpg';
 
 export type Photo = { src: ImageMetadata; alt: string };
@@ -14,6 +14,6 @@ export type Photo = { src: ImageMetadata; alt: string };
 export const photos: Record<string, Photo> = {
   hero: { src: heroSky, alt: '' },
   heroBuilding: { src: heroBuilding, alt: 'Sawtooth roofline of a glass-and-aluminium curtain wall' },
-  hospital: { src: facadeHospital, alt: 'Hospital entrance with a curved structural-glazing front between ACP-clad walls' },
+  kitchenGreen: { src: kitchenGreen, alt: 'Sage green modular kitchen with glass shutters and a lit splashback' },
   renderFins: { src: renderFins, alt: '3D design of a two-storey building with sculpted vertical ACP fins over a glazed ground floor' },
 };

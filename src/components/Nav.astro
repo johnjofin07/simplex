@@ -149,9 +149,12 @@ import { site, telHref, waHref } from '../content/site';
       padding: 12px 0 4px;
       font-size: 16px;
     }
+    /* Once the sections collapse into the menu, the header keeps only the
+       menu button — Call lives in the hero and the bottom bar. */
+    .actions :global(.nav-call) {
+      display: none;
+    }
   }
-  /* Below 720px the fixed bottom bar carries Call + WhatsApp, so the header
-     keeps only the menu button (see BottomBar.astro). */
   @media (max-width: 720px) {
     .brand {
       gap: 10px;
@@ -162,9 +165,6 @@ import { site, telHref, waHref } from '../content/site';
     }
     .wordmark {
       font-size: 19px;
-    }
-    .actions :global(.nav-call) {
-      display: none;
     }
   }
 </style>

@@ -23,8 +23,9 @@ Sveltia CMS) land in those subfolders as slugified WebP files and are the owner'
 | `wardrobe-blue.jpg` | Blue glass-shutter wardrobe with dressing unit and lit mirror | Photo |
 | `wardrobe-green.jpg` | Green and white wardrobe wall with dressing corner | Photo |
 | `dressing-unit.jpg` | Grey and wood wardrobe with dressing table and shelving | Photo |
-| `kitchen-green.jpg` | Sage green modular kitchen, glass shutters, lit splashback | Photo |
+| `kitchen-green.jpg` | Sage green modular kitchen, glass shutters, lit splashback; also the process lead photo | Photo |
 | `kitchen-grey.jpg` | Grey kitchen with fluted-glass overhead shutters | Photo |
+| `kitchen-black.jpg` | Black and white gloss kitchen, teal chimney over the hob | Photo |
 | `car-porch.jpg` | Aluminium car porch with ACP roof, lit ceiling and louvred sides | Photo |
 | `render-diagnostics.jpg` | 3D design of a diagnostics centre facade | Render |
 | `render-bungalow.jpg` | 3D design of a house front with car porch | Render |

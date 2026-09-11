@@ -2,6 +2,9 @@ title: Kitchens
 text: Modular kitchens in aluminium and glass that take steam, heat and daily wiping.
 order: 40
 photos:
+  - image: /src/assets/photos/kitchens/kitchen-black.jpg
+    caption: Black and white gloss kitchen with hob run
+    alt: Black and white gloss modular kitchen with a teal chimney over the hob and a lit marble splashback
   - image: /src/assets/photos/kitchens/kitchen-green.jpg
     caption: Sage green modular kitchen
     alt: Sage green modular kitchen with glass shutters and a lit splashback

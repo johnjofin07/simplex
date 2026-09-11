@@ -9,16 +9,17 @@
     <link rel="icon" href="logo.png" />
     <style>
       /* The admin is always light. The mark is black line art, so Sveltia's
-         dark theme would put a black logo on a black background. The html
-         attributes above are honoured by Sveltia's app shell; the script
-         below seeds the same choice into its saved preferences. */
+         dark theme would put a black logo on a black background. The script
+         below pins the saved preference to light and flips the html attribute
+         back if Sveltia ever sets it to dark. */
       html, body {
         background: #fff;
         color: #1f201e;
       }
       /* Splash shown while the Sveltia script downloads and boots. Plain HTML
          so it paints before any JavaScript runs; removed once Sveltia has
-         drawn its own screen (sign-in page or the app). */
+         drawn something interactive (sign-in page or the app), never on its
+         own "Loading…" screens. */
       #splash {
         position: fixed;
         inset: 0;
@@ -58,18 +59,30 @@
       }
     </style>
     <script>
-      // Sveltia stores the theme choice in localStorage and, when it is
-      // "auto" or unset, follows the OS dark mode. Default it to light so the
-      // first visit is white; a theme picked later in Settings still wins.
+      // Sveltia reads its theme from localStorage ("sveltia-cms.prefs") and,
+      // when it is "auto" or unset, follows the OS dark mode. Pin it to light
+      // on every visit, including browsers where dark was saved earlier, and
+      // undo any later switch to dark before it can paint.
       (function () {
         var key = "sveltia-cms.prefs";
         try {
           var prefs = JSON.parse(localStorage.getItem(key) || "{}") || {};
-          if (!prefs.theme || prefs.theme === "auto") {
+          if (prefs.theme !== "light") {
             prefs.theme = "light";
             localStorage.setItem(key, JSON.stringify(prefs));
           }
         } catch (e) {}
+
+        var root = document.documentElement;
+        function keepLight() {
+          if (root.dataset.theme !== "light") root.dataset.theme = "light";
+          if (root.dataset.autoTheming !== "false") root.dataset.autoTheming = "false";
+        }
+        new MutationObserver(keepLight).observe(root, {
+          attributes: true,
+          attributeFilter: ["data-theme", "data-auto-theming"],
+        });
+        keepLight();
       })();
     </script>
   </head>
@@ -93,12 +106,16 @@
           observer.disconnect();
         }
 
-        // Sveltia mounts an empty shell first, then fetches config.yml and
-        // draws the sign-in page or the app. Wait for something interactive
-        // (a button or heading) outside the splash before fading it out, so
-        // Sveltia's own loading state never shows through.
+        // Sveltia mounts an empty shell, then shows "Loading CMS
+        // Configuration…" / "Loading Site Data…" (logo, heading and a message,
+        // no controls), then the sign-in page or the app. Only something
+        // interactive counts as ready, so the splash stays over every loading
+        // screen. Headings are deliberately not a signal: the loading screens
+        // have one.
         function ready() {
-          var els = document.body.querySelectorAll("button, h1, h2, [role=\"main\"]");
+          var els = document.body.querySelectorAll(
+            'button, input, [role="toolbar"], [role="navigation"], [role="main"]'
+          );
           for (var i = 0; i < els.length; i++) {
             if (!splash.contains(els[i])) return true;
           }
@@ -114,7 +131,7 @@
         // Safety nets: never leave the splash stuck over a broken or slow load.
         var cms = document.querySelector('script[src*="sveltia-cms"]');
         if (cms) cms.addEventListener("error", done);
-        setTimeout(done, 15000);
+        setTimeout(done, 20000);
       })();
     </script>
   </body>

@@ -116,7 +116,7 @@ export const site = {
       { n: '05', title: 'Fitting, handover and lifetime support', text: 'Our own team installs, seals and hands over. After that, support and maintenance for life.' },
     ],
     photos: [
-      { photo: 'hospital', caption: 'Curved structural glazing, hospital front' },
+      { photo: 'kitchenGreen', caption: 'Sage green modular kitchen' },
     ] as { photo: string; caption: string }[],
   },
 
