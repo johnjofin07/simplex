@@ -3,13 +3,9 @@
 // `TODO(owner)`. Contact details, address, email and Instagram were supplied
 // by the owner on 2026-09-11. Still open: opening hours.
 // Fixed photographs (hero, process, contact) are keyed in photos.ts. The Work
-// albums and the 3D design row are CMS-managed: see src/content/work/,
-// src/content/designs/ and public/admin/config.yml.
+// cards (title, text, photos) and the 3D design row are CMS-managed: see
+// src/content/services/, src/content/designs/ and public/admin/config.yml.
 // =====================================================================
-
-/** Album keys for the Work section. Must match the `service` options in public/admin/config.yml. */
-export const serviceKeys = ['glazing', 'windows', 'wardrobes', 'kitchens', 'interiors', 'porches'] as const;
-export type ServiceKey = (typeof serviceKeys)[number];
 
 export type IconName =
   | 'tape'
@@ -106,50 +102,7 @@ export const site = {
   services: {
     headline: 'Every kind of aluminium work, large scale and small',
     sub: 'From one window to a whole building front. Glass, ACP and aluminium, measured, made and fitted by Simplex.',
-    /** One card per service. Photos come from src/content/work/ (tagged by `key`); the cover is the photo marked `cover`, else the first. */
-    items: [
-      {
-        key: 'glazing',
-        title: 'Structural glazing and ACP facades',
-        text: 'Glass fronts, ACP cladding and exterior work for shops, hospitals, offices and homes.',
-        span: 'wide',
-      },
-      {
-        key: 'windows',
-        title: 'Windows and doors',
-        text: 'Sliding, casement and fixed windows, doors and sealing work. Weather out, light in.',
-        span: 'narrow',
-      },
-      {
-        key: 'wardrobes',
-        title: 'ACP cupboards and wardrobes',
-        text: 'Glass and ACP shutters on aluminium frames. They never swell, warp or feed termites.',
-        span: 'third',
-      },
-      {
-        key: 'kitchens',
-        title: 'Kitchens',
-        text: 'Modular kitchens in aluminium and glass that take steam, heat and daily wiping.',
-        span: 'third',
-      },
-      {
-        key: 'interiors',
-        title: 'Interiors and partitions',
-        text: 'Dressing units, shelving, glass partitions and full interior fit-outs.',
-        span: 'third',
-      },
-      {
-        key: 'porches',
-        title: 'Car porches, roofing and renovation',
-        text: 'ACP-roofed car porches, louvred screens, sheeting and renovation of older aluminium work.',
-        span: 'full',
-      },
-    ] as {
-      key: ServiceKey;
-      title: string;
-      text: string;
-      span: 'wide' | 'narrow' | 'third' | 'full';
-    }[],
+    /** The cards themselves (title, text, photos) live in src/content/services/, one file per card. */
   },
 
   process: {

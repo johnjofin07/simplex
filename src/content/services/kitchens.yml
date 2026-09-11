@@ -1,0 +1,10 @@
+title: Kitchens
+text: Modular kitchens in aluminium and glass that take steam, heat and daily wiping.
+order: 40
+photos:
+  - image: /src/assets/photos/kitchens/kitchen-green.jpg
+    caption: Sage green modular kitchen
+    alt: Sage green modular kitchen with glass shutters and a lit splashback
+  - image: /src/assets/photos/kitchens/kitchen-grey.jpg
+    caption: Fluted-glass kitchen shutters
+    alt: Grey modular kitchen with fluted-glass overhead shutters

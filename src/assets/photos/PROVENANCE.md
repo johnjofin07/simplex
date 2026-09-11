@@ -4,8 +4,11 @@ Apart from the hero background, all photographs and renders in this folder are S
 supplied by the owner on 2026-09-11 (WhatsApp export, longest edge 1600 px).
 They may be used freely on the site.
 
-Photos added later through the site's admin page (`/admin`, Sveltia CMS) land in this folder as
-slugified WebP files and are the owner's own uploads.
+The files in the root of this folder are the fixed photos referenced from `src/content/photos.ts`.
+Each Gallery card keeps its photos in its own subfolder (`glazing/`, `windows/`, `wardrobes/`,
+`kitchens/`, `interiors/`, `porches/`) and the 3D design row uses `designs/`; a photo shown on two
+cards is copied into both folders. Photos added later through the site's admin page (`/admin`,
+Sveltia CMS) land in those subfolders as slugified WebP files and are the owner's own uploads.
 
 | File | Subject | Kind |
 |---|---|---|

@@ -1,0 +1,19 @@
+title: Structural glazing and ACP facades
+text: Glass fronts, ACP cladding and exterior work for shops, hospitals, offices and homes.
+order: 10
+photos:
+  - image: /src/assets/photos/glazing/facade-retail.jpg
+    caption: Retail front, ACP fin and glass shopfront
+    alt: Three-storey retail building with a red ACP fin, grey cladding and a glass shopfront
+  - image: /src/assets/photos/glazing/facade-hospital.jpg
+    caption: Curved structural glazing, hospital front
+    alt: Hospital entrance with a curved structural-glazing front between ACP-clad walls
+  - image: /src/assets/photos/glazing/hero-bakery.jpg
+    caption: Bakery, dark ACP and full-height glazing
+    alt: Two-storey bakery building with dark ACP cladding, full-height glazing and aluminium railings, lit at dusk
+  - image: /src/assets/photos/glazing/render-diagnostics.jpg
+    caption: '3D design: diagnostics centre, ACP and glazing'
+    alt: 3D design of a diagnostics centre facade in ACP and glazing
+  - image: /src/assets/photos/glazing/render-fins.jpg
+    caption: '3D design: sculpted ACP fins over a glazed ground floor'
+    alt: 3D design of a two-storey building with sculpted vertical ACP fins over a glazed ground floor

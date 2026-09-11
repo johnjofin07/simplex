@@ -1,8 +1,9 @@
 ---
 /**
- * Every kind of aluminium work. Each card is a folder of photographs: the
- * cover is shown here, and opening the card starts the page's photo viewer on
- * that service's album only. Without JS the card links to the first photo.
+ * Every kind of aluminium work. Each card is one entry in src/content/services/
+ * with its own photo folder: the first photo is the cover shown here, and
+ * opening the card starts the page's photo viewer on that card's album only.
+ * Without JS the card links to the first photo.
  */
 import { Image, getImage } from 'astro:assets';
 import Icon from './Icon.astro';
@@ -11,7 +12,7 @@ import Lightbox from './Lightbox.astro';
 import { site, waHref } from '../content/site';
 import { serviceAlbums } from '../content/gallery';
 
-// Albums come from src/content/work/ (managed at /admin).
+// Cards come from src/content/services/ (managed at /admin).
 const cards = await Promise.all(
   (await serviceAlbums()).map(async (s) => ({
     ...s,

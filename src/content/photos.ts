@@ -1,6 +1,6 @@
 // Fixed photos referenced by key from site.ts: the hero layers, the process
-// lead photo and the contact panel. Everything in the Work albums and the 3D
-// design row is CMS-managed instead (src/content/work/, src/content/designs/).
+// lead photo and the contact panel. Everything in the Work cards and the 3D
+// design row is CMS-managed instead (src/content/services/, src/content/designs/).
 // Apart from the hero sky and building (stock, see PROVENANCE.md), every file
 // is a photograph or 3D render of Simplex's own work, supplied by the owner.
 import type { ImageMetadata } from 'astro';

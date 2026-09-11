@@ -1,0 +1,10 @@
+title: Car porches, roofing and renovation
+text: ACP-roofed car porches, louvred screens, sheeting and renovation of older aluminium work.
+order: 60
+photos:
+  - image: /src/assets/photos/porches/car-porch.jpg
+    caption: ACP-roofed car porch with louvred screens
+    alt: Aluminium car porch with an ACP roof, lit ceiling and louvred side screens
+  - image: /src/assets/photos/porches/render-bungalow.jpg
+    caption: '3D design: house front with car porch'
+    alt: 3D design of a house front with a car porch

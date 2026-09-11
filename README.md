@@ -38,9 +38,10 @@ Built with the owner's verified content and photographs (2026-09-11).
   (hidden while empty). Domain: simplexkdlr.com.
 - Photographs and 3D renders are Simplex's own and listed in
   `src/assets/photos/PROVENANCE.md`. The hero, process and contact photos are
-  keyed in `src/content/photos.ts`; the Work albums and the 3D design row are
-  one YAML file per photo in `src/content/work/` and `src/content/designs/`,
-  edited from the phone at `/admin` (see below).
+  keyed in `src/content/photos.ts`; the Gallery cards are one YAML file per
+  card in `src/content/services/` (title, text, photo list) and the 3D design
+  row is one file per render in `src/content/designs/`, all edited from the
+  phone at `/admin` (see below).
 
 ## Layout of the source
 
@@ -54,13 +55,14 @@ src/
   styles/global.css        reset, type scale, grid, bands, photo panel, reveal
   scripts/register.ts      the page's one script: reveal on entry,
                            horizontal card scroller arrows
-  content/site.ts          all page copy, service cards, contact details
+  content/site.ts          all page copy, section headings, contact details
   content/photos.ts        fixed photos (hero, process, contact) key → file
-  content/work/*.yml       Work album photos: image, caption, service, cover, order
+  content/services/*.yml   one Gallery card each: title, text, order, photos[]
   content/designs/*.yml    3D design row: image, caption, order
   content/gallery.ts       reads the two collections for Services and Design
   content.config.ts        collection schemas (astro:content)
-  assets/photos/           Simplex's own photographs and renders + PROVENANCE.md
+  assets/photos/           fixed photos + PROVENANCE.md; one subfolder per
+                           Gallery card (glazing/, windows/, ...) and designs/
 public/admin/              Sveltia CMS (index.html + config.yml), the phone admin
 ```
 
@@ -94,11 +96,16 @@ Open https://simplexkdlr.com/admin. Anyone who should upload needs a GitHub
 account with write access to the repo (Settings → Collaborators). Two
 collections:
 
-- **Work photos**: one entry per photo. Pick the photo, write a one-line
-  caption, choose the service card it belongs to, and save. Tick "Use as the
-  card cover" on the one photo that should front the card. "Order" sorts the
-  album, low numbers first.
-- **3D designs**: photo, caption, order.
+- **Gallery cards**: one entry per card in the Gallery section, holding the
+  card's title, its one-line text, an "Order" number (low numbers first) and
+  the list of photos. The first photo in the list is the card's cover; drag
+  photos to reorder. Each card's photos are stored in their own folder,
+  `src/assets/photos/<card>/`, named after the entry file, so set the title
+  before uploading. Adding a new card adds a new card to the site; the grid
+  shape (a wide and a narrow card, three squares, one banner) repeats as
+  cards are added. A card with no photos is left off the site.
+- **3D designs**: photo, caption, order. Photos land in
+  `src/assets/photos/designs/`.
 
 Saving commits the YAML entry and the image into the repo, which triggers the
 GitHub Pages build. Phone photos are resized to 2400 px WebP in the browser

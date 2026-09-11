@@ -1,0 +1,10 @@
+title: Windows and doors
+text: Sliding, casement and fixed windows, doors and sealing work. Weather out, light in.
+order: 20
+photos:
+  - image: /src/assets/photos/windows/window-fixed.jpg
+    caption: Four-pane fixed window
+    alt: Black aluminium four-pane window set in a white wall, palm trees seen through it
+  - image: /src/assets/photos/windows/window-corner.jpg
+    caption: Corner window on a verandah
+    alt: Tall black aluminium window at the corner of a white verandah

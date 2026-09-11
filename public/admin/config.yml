@@ -14,9 +14,12 @@ site_url: https://simplexkdlr.com
 display_url: https://simplexkdlr.com
 logo_url: https://simplexkdlr.com/logo.png
 
-# Photos are committed into src/assets/photos so Astro can resize and convert
-# them at build time. Phone photos are shrunk in the browser before upload.
+# Photos are committed under src/assets/photos so Astro can resize and convert
+# them at build time. Each gallery card keeps its photos in its own subfolder
+# (src/assets/photos/<card>/, set per collection below); the 3D designs use
+# src/assets/photos/designs/. Phone photos are shrunk in the browser before upload.
 media_folder: /src/assets/photos
+public_folder: /src/assets/photos
 media_libraries:
   default:
     config:
@@ -33,60 +36,65 @@ editor:
   preview: false
 
 collections:
-  - name: work
-    label: Work photos
-    label_singular: Work photo
-    description: Photos shown in the Work section. Each photo belongs to one service card; tap a card on the site to see its album.
-    folder: /src/content/work
+  - name: services
+    label: Gallery cards
+    label_singular: Gallery card
+    description: One card per kind of work in the Gallery section. Each card has its own photo folder. The first photo in the list is the card's cover; tap the card on the site to see the rest.
+    folder: /src/content/services
+    # {{slug}} is the entry's file name, so every card gets its own folder.
+    media_folder: /src/assets/photos/{{slug}}
+    public_folder: /src/assets/photos/{{slug}}
     create: true
+    delete: true
     format: yaml
     extension: yml
-    identifier_field: caption
-    summary: '{{caption}}'
-    thumbnail: image
-    sortable_fields: [order, caption, service]
+    identifier_field: title
+    summary: '{{title}}'
+    thumbnail: photos.*.image
+    sortable_fields: [order, title]
     fields:
-      - name: image
-        label: Photo
-        widget: image
-      - name: caption
-        label: Caption
+      - name: title
+        label: Card title
         widget: string
-        hint: One short line, shown under the photo.
-      - name: service
-        label: Service
-        widget: select
-        hint: Which card on the site this photo belongs to.
-        options:
-          - { label: Structural glazing and ACP facades, value: glazing }
-          - { label: Windows and doors, value: windows }
-          - { label: ACP cupboards and wardrobes, value: wardrobes }
-          - { label: Kitchens, value: kitchens }
-          - { label: Interiors and partitions, value: interiors }
-          - { label: Car porches, roofing and renovation, value: porches }
-      - name: cover
-        label: Use as the card cover
-        widget: boolean
-        default: false
-        required: false
-        hint: Only one photo per service should be the cover.
+        hint: Shown on the card, for example "Windows and doors". Also names the photo folder, so pick it before uploading photos.
+      - name: text
+        label: Card text
+        widget: text
+        hint: One or two short sentences under the title.
       - name: order
         label: Order
         widget: number
         value_type: int
         default: 50
-        hint: Lower numbers come first in the album.
-      - name: alt
-        label: Description for screen readers
-        widget: string
-        required: false
-        hint: Optional. Leave blank to use the caption.
+        hint: Lower numbers come first in the gallery.
+      - name: photos
+        label: Photos
+        label_singular: Photo
+        widget: list
+        summary: '{{fields.caption}}'
+        min: 1
+        hint: The first photo is the card's cover. Drag photos to reorder them.
+        fields:
+          - name: image
+            label: Photo
+            widget: image
+          - name: caption
+            label: Caption
+            widget: string
+            hint: One short line, shown under the photo.
+          - name: alt
+            label: Description for screen readers
+            widget: string
+            required: false
+            hint: Optional. Leave blank to use the caption.
 
   - name: designs
     label: 3D designs
     label_singular: 3D design
     description: Renders shown in the "You see it finished before we begin" row.
     folder: /src/content/designs
+    media_folder: /src/assets/photos/designs
+    public_folder: /src/assets/photos/designs
     create: true
     format: yaml
     extension: yml
