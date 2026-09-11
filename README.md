@@ -68,7 +68,13 @@ public/admin/              Sveltia CMS (index.html + config.yml), the phone admi
 
 Cloudflare Pages, connected to the GitHub repo `johnjofin07/simplex`. Every
 push to `main` rebuilds and publishes https://simplexkdlr.com within a couple
-of minutes. There is no GitHub Actions workflow any more.
+of minutes.
+
+Until the custom domain is live, `.github/workflows/deploy.yml` also publishes a
+mirror to GitHub Pages at https://johnjofin07.github.io/simplex/ on every push
+to `main` (it builds with `GITHUB_PAGES=true`, which sets `site`/`base` for the
+sub-path). Delete that workflow and the `GITHUB_PAGES` branch in
+`astro.config.mjs` once simplexkdlr.com works.
 
 Pages project settings: framework preset Astro, build command `pnpm build`,
 output directory `dist`, environment variable `PNPM_VERSION=9.14.2`. Node 22
