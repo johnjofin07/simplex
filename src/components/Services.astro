@@ -42,7 +42,7 @@ const cards = await Promise.all(
     <ul class="cards">
       {cards.map((s, i) => (
         <li class={s.span} data-reveal style={`--d: ${0.06 * (i % 3)}s`}>
-          <a class="photo card" href={s.album[0].src} data-lb-album={s.key} aria-label={`${s.title} — open ${s.album.length} photos`}>
+          <a class="photo card" href={s.album[0].src} data-lb-album={s.key} aria-label={`${s.title}, open ${s.album.length} photos`}>
             <Image
               src={s.cover.src}
               alt={s.cover.alt}
@@ -54,7 +54,7 @@ const cards = await Promise.all(
               decoding="async"
             />
             <span class="scrim" />
-            <span class="count label" aria-hidden="true"><Icon name="photos" size={16} /> {s.album.length}</span>
+            <span class="count" aria-hidden="true"><Icon name="photos" size={14} /> {s.album.length}</span>
             <span class="cap">
               <span class="h3">{s.title}</span>
               <p class="small">{s.text}</p>
@@ -66,9 +66,8 @@ const cards = await Promise.all(
       ))}
     </ul>
   </div>
+  <Lightbox />
 </section>
-
-<Lightbox />
 
 <style>
   .ctas {
@@ -76,19 +75,23 @@ const cards = await Promise.all(
     flex-wrap: wrap;
     gap: 10px;
   }
+  /* Photo count. Same quiet register as the naming pills elsewhere. */
   .count {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 14px;
+    right: 14px;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 7px 12px;
+    gap: 5px;
+    padding: 4px 10px;
     border-radius: var(--r-pill);
-    background: rgba(255, 255, 255, 0.86);
-    color: var(--ink);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: color-mix(in srgb, var(--white) 88%, transparent);
+    color: var(--ink-2);
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   /* Title, blurb and prompt each sit on their own line, left-aligned. */
   .cap {

@@ -1,5 +1,5 @@
 // =====================================================================
-// SITE CONTENT — verified by the owner on 2026-09-11 unless marked
+// SITE CONTENT. Verified by the owner on 2026-09-11 unless marked
 // `TODO(owner)`. Contact details, address, email and Instagram were supplied
 // by the owner on 2026-09-11. Still open: opening hours.
 // Fixed photographs (hero, process, contact) are keyed in photos.ts. The Work

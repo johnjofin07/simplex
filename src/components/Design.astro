@@ -34,10 +34,7 @@ const designs = await designPhotos();
         <li data-reveal style={`--d: ${0.07 * i}s`}>
           <figure class="photo card">
             <Image src={d.src} alt={d.alt} widths={[560, 900, 1200]} sizes="(max-width: 720px) 84vw, 560px" format="webp" quality={76} loading="lazy" decoding="async" />
-            <figcaption class="cap">
-              <span class="tag label">3D design</span>
-              <span class="small">{d.caption}</span>
-            </figcaption>
+            <figcaption class="cap pill">{d.caption}</figcaption>
           </figure>
         </li>
       ))}
@@ -126,32 +123,6 @@ const designs = await designPhotos();
   .card img {
     object-position: 50% 0;
   }
-  .card .cap {
-    left: 16px;
-    right: auto;
-    bottom: 16px;
-    /* Shrink to the caption, but never past the card: long captions wrap
-       inside the pill instead of being clipped by the card's overflow. */
-    max-width: calc(100% - 32px);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 14px 8px 8px;
-    background: var(--white);
-    color: var(--ink);
-    border-radius: var(--r-pill);
-  }
-  .card .cap .small {
-    min-width: 0;
-  }
-  .tag {
-    flex: none;
-    white-space: nowrap;
-    padding: 5px 10px;
-    border-radius: var(--r-pill);
-    background: var(--ink);
-    color: var(--on-ink);
-  }
   @media (max-width: 1100px) {
     .scroller {
       margin-top: 48px;
@@ -169,11 +140,6 @@ const designs = await designPhotos();
     }
     .steps {
       max-width: none;
-    }
-    .card .cap {
-      left: 12px;
-      bottom: 12px;
-      max-width: calc(100% - 24px);
     }
   }
 </style>

@@ -1,4 +1,4 @@
-/* Simplex Aluminium — global styles. */
+/* Simplex Aluminium global styles. */
 @font-face {
   font-family: 'Source Sans Fallback';
   src: local('Helvetica Neue'), local('Arial');
@@ -161,6 +161,15 @@ button {
 .band.greige {
   background: var(--greige);
 }
+/* Where the ground changes, the two bands each give a full section and the
+   colour marks the join. Where two bands share a ground there is no join to
+   mark, so the doubled padding reads as a hole: halve the second band's top
+   padding and every seam down the page looks like the same amount of air. */
+.band.paper + .band.paper,
+.band.sheet + .band.sheet,
+.band.greige + .band.greige {
+  padding-top: calc(var(--section) / 2);
+}
 .section-head {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -236,6 +245,25 @@ a.photo:focus-visible img {
   opacity: 0.86;
   max-width: 30em;
   margin-top: 6px;
+}
+/* Naming pill on a photograph. It says what the picture is and then gets out
+   of the way, so it is small, quiet grey and tucked into the corner: the
+   photograph is the thing being looked at, not its label. */
+.photo .cap.pill {
+  left: 14px;
+  right: auto;
+  bottom: 14px;
+  /* Shrink to the words, but never past the photo: a long name wraps inside
+     the pill instead of being clipped by the card's overflow. */
+  max-width: calc(100% - 28px);
+  padding: 5px 12px;
+  background: color-mix(in srgb, var(--white) 88%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--ink-2);
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  line-height: 18px;
 }
 
 /* Body does not scroll behind the photo lightbox. */

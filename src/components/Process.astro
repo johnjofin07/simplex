@@ -18,7 +18,7 @@ const leadP = photos[lead.photo];
     <div class="grid work">
       <figure class="photo lead" data-reveal>
         <Image src={leadP.src} alt={leadP.alt} widths={[600, 1000, 1400]} sizes="(max-width: 1100px) 100vw, 46vw" format="webp" quality={76} loading="lazy" decoding="async" />
-        <figcaption class="cap"><span class="small">{lead.caption}</span></figcaption>
+        <figcaption class="cap pill">{lead.caption}</figcaption>
       </figure>
       <ol class="steps">
         {site.process.steps.map((s, i) => (
@@ -36,7 +36,7 @@ const leadP = photos[lead.photo];
         return (
           <figure class="photo pair" data-reveal style={`--d: ${0.08 * i}s`}>
             <Image src={p.src} alt={p.alt} widths={[600, 1000, 1400]} sizes="(max-width: 720px) 100vw, 40vw" format="webp" quality={76} loading="lazy" decoding="async" />
-            <figcaption class="cap"><span class="small">{r.caption}</span></figcaption>
+            <figcaption class="cap pill">{r.caption}</figcaption>
           </figure>
         );
       })}
@@ -98,16 +98,6 @@ const leadP = photos[lead.photo];
   }
   .pair:nth-of-type(3) {
     grid-column: 7 / span 6;
-  }
-  .pair .cap,
-  .lead .cap {
-    left: 16px;
-    bottom: 16px;
-    right: auto;
-    padding: 8px 14px;
-    background: var(--white);
-    color: var(--ink);
-    border-radius: var(--r-pill);
   }
   @media (max-width: 1100px) {
     .work {

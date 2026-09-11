@@ -7,7 +7,7 @@ import { site, telHref, waHref } from '../content/site';
 
 <header class="nav">
   <div class="wrap row">
-    <a class="brand" href="#top" aria-label={`${site.name} — top of page`}>
+    <a class="brand" href="#top" aria-label={`${site.name}, top of page`}>
       <Logo height={34} />
       <span class="wordmark">{site.wordmark}</span>
     </a>
@@ -150,7 +150,7 @@ import { site, telHref, waHref } from '../content/site';
       font-size: 16px;
     }
     /* Once the sections collapse into the menu, the header keeps only the
-       menu button — Call lives in the hero and the bottom bar. */
+       menu button. Call lives in the hero and the bottom bar. */
     .actions :global(.nav-call) {
       display: none;
     }
