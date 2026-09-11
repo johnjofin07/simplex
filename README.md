@@ -66,26 +66,33 @@ public/admin/              Sveltia CMS (index.html + config.yml), the phone admi
 
 ## Hosting
 
-Cloudflare Pages, connected to the GitHub repo `johnjofin07/simplex`. Every
-push to `main` rebuilds and publishes https://simplexkdlr.com within a couple
-of minutes.
+GitHub Pages, built by `.github/workflows/deploy.yml`. Every push to `main`
+runs `pnpm build` in GitHub Actions and publishes `dist` to
+https://simplexkdlr.com within a couple of minutes. Nothing else is involved:
+no Cloudflare, no Netlify, no login server.
 
-Until the custom domain is live, `.github/workflows/deploy.yml` also publishes a
-mirror to GitHub Pages at https://johnjofin07.github.io/simplex/ on every push
-to `main` (it builds with `GITHUB_PAGES=true`, which sets `site`/`base` for the
-sub-path). Delete that workflow and the `GITHUB_PAGES` branch in
-`astro.config.mjs` once simplexkdlr.com works.
+Repo settings (already applied): Settings → Pages → Source "GitHub Actions",
+custom domain `simplexkdlr.com`, "Enforce HTTPS" on. `public/CNAME` repeats
+the domain so a manual deploy cannot drop it.
 
-Pages project settings: framework preset Astro, build command `pnpm build`,
-output directory `dist`, environment variable `PNPM_VERSION=9.14.2`. Node 22
-comes from `.node-version`. Custom domains: `simplexkdlr.com` and
-`www.simplexkdlr.com` (DNS is on Cloudflare, records are created by Pages).
+DNS is on Hostinger (the domain's nameservers are Hostinger's). Records:
+
+```
+A      @    185.199.108.153
+A      @    185.199.109.153
+A      @    185.199.110.153
+A      @    185.199.111.153
+CNAME  www  johnjofin07.github.io
+```
+
+If the site ever moves, change these records and the custom domain in the
+Pages settings; the workflow does not care where the domain points.
 
 ## Updating photos from a phone
 
-Open https://simplexkdlr.com/admin and sign in with GitHub. Anyone who should
-upload needs a GitHub account with write access to the repo (Settings →
-Collaborators). Two collections:
+Open https://simplexkdlr.com/admin. Anyone who should upload needs a GitHub
+account with write access to the repo (Settings → Collaborators). Two
+collections:
 
 - **Work photos**: one entry per photo. Pick the photo, write a one-line
   caption, choose the service card it belongs to, and save. Tick "Use as the
@@ -94,22 +101,17 @@ Collaborators). Two collections:
 - **3D designs**: photo, caption, order.
 
 Saving commits the YAML entry and the image into the repo, which triggers the
-Cloudflare build. Phone photos are resized to 2400 px WebP in the browser
+GitHub Pages build. Phone photos are resized to 2400 px WebP in the browser
 before upload (`media_libraries` in `public/admin/config.yml`), and Astro
 makes the responsive sizes at build time as it does for every other photo.
 
-Login goes through a small Cloudflare Worker,
-[sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth), whose URL is
-`backend.base_url` in `public/admin/config.yml`. Setup, once:
-
-1. Deploy the worker from that repo's README (the Deploy button). Note its
-   URL, `https://sveltia-cms-auth.<subdomain>.workers.dev`.
-2. GitHub → Settings → Developer settings → OAuth Apps → New. Homepage URL
-   `https://simplexkdlr.com`, callback URL `<worker URL>/callback`.
-3. In the worker's Settings → Variables set `GITHUB_CLIENT_ID`,
-   `GITHUB_CLIENT_SECRET` (encrypted) and
-   `ALLOWED_DOMAINS=simplexkdlr.com,*.simplexkdlr.com,*.pages.dev`.
-4. Put the worker URL into `backend.base_url` in `public/admin/config.yml`.
+Signing in, once per device: on the /admin login screen choose "sign in with
+a personal access token". The link there opens GitHub's token page with the
+right settings prefilled; if you create one by hand, use a fine-grained token
+limited to the `simplex` repository with **Contents: Read and write**. Paste
+the token into the admin and it is remembered by that browser. Fine-grained
+tokens expire after at most a year, so make a new one when the admin says
+the login stopped working.
 
 ## Notes for whoever builds next
 

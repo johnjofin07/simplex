@@ -1,15 +1,14 @@
 # Sveltia CMS config for simplexkdlr.com/admin.
-# Two things to edit after deploying the login worker (see README, "Hosting"):
-#   backend.base_url  -> the sveltia-cms-auth worker URL
-# Everything saved here is committed to the repo on GitHub, which triggers a
-# Cloudflare Pages rebuild; the site updates a couple of minutes later.
+# No login server: with no backend.base_url, Sveltia offers "sign in with a
+# personal access token" (see README, "Updating photos from a phone").
+# Everything saved here is committed to the repo on GitHub, which triggers the
+# GitHub Pages build; the site updates a couple of minutes later.
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 
 backend:
   name: github
   repo: johnjofin07/simplex
   branch: main
-  base_url: https://sveltia-cms-auth.REPLACE-ME.workers.dev
 
 site_url: https://simplexkdlr.com
 display_url: https://simplexkdlr.com

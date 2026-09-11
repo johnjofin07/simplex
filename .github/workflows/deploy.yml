@@ -1,5 +1,5 @@
-# Temporary mirror at https://johnjofin07.github.io/simplex/ until simplexkdlr.com
-# (Cloudflare Pages) is live. Delete this file once the custom domain works.
+# Builds the site and publishes it to GitHub Pages at https://simplexkdlr.com
+# on every push to main (including the commits Sveltia CMS makes from /admin).
 name: Deploy to GitHub Pages
 
 on:
@@ -28,8 +28,6 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
-        env:
-          GITHUB_PAGES: 'true'
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
