@@ -21,22 +21,26 @@ pnpm run check     # astro check
 
 ## Status
 
-Built. All copy, numbers and photographs are **placeholders** until the owner
-supplies real ones.
+Built with the owner's verified content and photographs (2026-09-11).
 
-- Every placeholder lives in `src/content/site.ts` and is marked
-  `TODO(owner)`. There are **32** of them. Swap the values; nothing else on
-  the page needs to change.
-- Photographs are demo images from Unsplash, mapped by key in
-  `src/content/photos.ts`. Source, photographer and licence for each are
-  recorded in `src/assets/photos/PROVENANCE.md` and
-  `src/assets/plates/PROVENANCE.md`, and embedded in each JPEG's comment
-  block. Replace them with real photographs of finished work (daylight,
-  straight on), keeping the key in `photos.ts` and changing the file.
-  Unused spares (`kitchen-detail.jpg`, `plate-03/04/06.jpg`) are kept as
-  alternates.
-- Nothing on the page states a founding year, a project count, a client name
-  or a quotation. Do not add any until the owner confirms them.
+- Company facts on the page (since 1993, Kodungallur, all Kerala, 1000+
+  sites, 30+ team, 2000 sq ft workshop, Eurobond / Aludecor / Viva, free site
+  visit and quotation, 3D design, lifetime support) were supplied by the
+  owner. Everything lives in `src/content/site.ts`.
+- Contact details supplied by the owner (2026-09-11): James Thiyyadi
+  (primary for calls) and Amal Jose (primary for WhatsApp), both on calls and
+  WhatsApp; email simplexkdlr@gmail.com; address Near AR Hospital,
+  Chandapura, Kodungallur, Thrissur; Instagram @simplexaluminium.
+- Logo: the owner's mark is kept at `src/assets/brand/logo-original.png` and
+  redrawn as a stroked SVG in `components/Logo.astro` (also the favicon and
+  `public/logo.png` for Open Graph / JSON-LD).
+- Still a placeholder, marked `TODO(owner)` in `site.ts`: opening hours
+  (hidden while empty). Domain: simplexkdlr.com.
+- Photographs and 3D renders are Simplex's own and listed in
+  `src/assets/photos/PROVENANCE.md`. The hero, process and contact photos are
+  keyed in `src/content/photos.ts`; the Work albums and the 3D design row are
+  one YAML file per photo in `src/content/work/` and `src/content/designs/`,
+  edited from the phone at `/admin` (see below).
 
 ## Layout of the source
 
@@ -44,17 +48,62 @@ supplies real ones.
 src/
   pages/index.astro        composes the sections in order
   layouts/Base.astro       head, font, tokens, skip link, JSON-LD LocalBusiness
-  components/              Nav, Hero, WhyRow, Services, Spaces, Process,
-                           SectionDrawing, Close, Footer, BottomBar, Button, Icon
+  components/              Nav, Hero, WhyRow, Services, Lightbox, Process,
+                           Design, Close, Footer, BottomBar, Button, Icon, Logo
   styles/tokens.css        colour, type, layout, shape and motion tokens
   styles/global.css        reset, type scale, grid, bands, photo panel, reveal
-  scripts/register.ts      the page's one script: reveal on entry, drawing draw-in,
+  scripts/register.ts      the page's one script: reveal on entry,
                            horizontal card scroller arrows
-  content/site.ts          every placeholder
-  content/photos.ts        photo key → file map (swap files here)
-  assets/photos/           sourced demo photographs + PROVENANCE.md
-  assets/plates/           earlier demo photographs + PROVENANCE.md
+  content/site.ts          all page copy, service cards, contact details
+  content/photos.ts        fixed photos (hero, process, contact) key → file
+  content/work/*.yml       Work album photos: image, caption, service, cover, order
+  content/designs/*.yml    3D design row: image, caption, order
+  content/gallery.ts       reads the two collections for Services and Design
+  content.config.ts        collection schemas (astro:content)
+  assets/photos/           Simplex's own photographs and renders + PROVENANCE.md
+public/admin/              Sveltia CMS (index.html + config.yml), the phone admin
 ```
+
+## Hosting
+
+Cloudflare Pages, connected to the GitHub repo `johnjofin07/simplex`. Every
+push to `main` rebuilds and publishes https://simplexkdlr.com within a couple
+of minutes. There is no GitHub Actions workflow any more.
+
+Pages project settings: framework preset Astro, build command `pnpm build`,
+output directory `dist`, environment variable `PNPM_VERSION=9.14.2`. Node 22
+comes from `.node-version`. Custom domains: `simplexkdlr.com` and
+`www.simplexkdlr.com` (DNS is on Cloudflare, records are created by Pages).
+
+## Updating photos from a phone
+
+Open https://simplexkdlr.com/admin and sign in with GitHub. Anyone who should
+upload needs a GitHub account with write access to the repo (Settings →
+Collaborators). Two collections:
+
+- **Work photos**: one entry per photo. Pick the photo, write a one-line
+  caption, choose the service card it belongs to, and save. Tick "Use as the
+  card cover" on the one photo that should front the card. "Order" sorts the
+  album, low numbers first.
+- **3D designs**: photo, caption, order.
+
+Saving commits the YAML entry and the image into the repo, which triggers the
+Cloudflare build. Phone photos are resized to 2400 px WebP in the browser
+before upload (`media_libraries` in `public/admin/config.yml`), and Astro
+makes the responsive sizes at build time as it does for every other photo.
+
+Login goes through a small Cloudflare Worker,
+[sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth), whose URL is
+`backend.base_url` in `public/admin/config.yml`. Setup, once:
+
+1. Deploy the worker from that repo's README (the Deploy button). Note its
+   URL, `https://sveltia-cms-auth.<subdomain>.workers.dev`.
+2. GitHub → Settings → Developer settings → OAuth Apps → New. Homepage URL
+   `https://simplexkdlr.com`, callback URL `<worker URL>/callback`.
+3. In the worker's Settings → Variables set `GITHUB_CLIENT_ID`,
+   `GITHUB_CLIENT_SECRET` (encrypted) and
+   `ALLOWED_DOMAINS=simplexkdlr.com,*.simplexkdlr.com,*.pages.dev`.
+4. Put the worker URL into `backend.base_url` in `public/admin/config.yml`.
 
 ## Notes for whoever builds next
 

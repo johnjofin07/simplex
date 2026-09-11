@@ -9,18 +9,30 @@ interface Props {
   description: string;
 }
 const { title, description } = Astro.props;
-const favicon = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`;
+const favicon = '/favicon.svg';
+const logo = new URL('logo.png', site.siteUrl).href;
 
-// TODO(owner): the LocalBusiness record is built from placeholders in site.ts.
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: site.name,
+  legalName: site.legalName,
   url: site.siteUrl,
-  telephone: site.phone,
-  address: { '@type': 'PostalAddress', streetAddress: site.address[0], addressLocality: site.address[1] },
-  areaServed: site.serviceArea,
-  openingHours: site.hours,
+  logo,
+  image: logo,
+  telephone: site.contacts.map((c) => c.phone),
+  email: site.email,
+  sameAs: [site.instagram],
+  foundingDate: String(site.founded),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Near AR Hospital, Chandapura',
+    addressLocality: 'Kodungallur',
+    addressRegion: 'Kerala',
+    addressCountry: 'IN',
+  },
+  areaServed: 'Kerala, India',
+  ...(site.hours ? { openingHours: site.hours } : {}),
   description,
 };
 ---
@@ -38,6 +50,7 @@ const jsonLd = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content={logo} />
     <script is:inline>document.documentElement.classList.add('js');</script>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>

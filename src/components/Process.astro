@@ -17,7 +17,7 @@ const leadP = photos[lead.photo];
 
     <div class="grid work">
       <figure class="photo lead" data-reveal>
-        <Image src={leadP.src} alt={leadP.alt} widths={[600, 1000, 1600]} sizes="(max-width: 1100px) 100vw, 58vw" format="webp" quality={76} loading="lazy" decoding="async" />
+        <Image src={leadP.src} alt={leadP.alt} widths={[600, 1000, 1537]} sizes="(max-width: 1100px) 100vw, 58vw" format="webp" quality={76} loading="lazy" decoding="async" />
         <figcaption class="cap"><span class="small">{lead.caption}</span></figcaption>
       </figure>
       <ol class="steps">
@@ -53,7 +53,7 @@ const leadP = photos[lead.photo];
   .lead {
     grid-column: 1 / span 7;
     grid-row: 1 / span 2;
-    min-height: 560px;
+    min-height: 620px;
   }
   .lead img {
     height: 100%;

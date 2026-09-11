@@ -1,44 +1,12 @@
 /**
- * The page's one script. Reveals content as it enters the viewport, measures
- * the section drawing so it draws along real path lengths, and steps the
- * horizontal card scroller. Under reduced motion it only flips classes; CSS
+ * The page's one script. Reveals content as it enters the viewport, slides the
+ * hero photo for parallax, and steps the horizontal card scrollers. Under reduced motion it only flips classes; CSS
  * renders everything already settled.
  */
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ---------- Section drawing: measure real lengths ---------- */
-function measureDrawing(root: Element) {
-  const lines = root.querySelectorAll<SVGGeometryElement>('.l');
-  const speed = 1600;
-  const overlap = 0.3;
-  const budget = 2.2;
-  const plan: { el: SVGGeometryElement; dur: number; at: number }[] = [];
-  let clock = 0;
-  lines.forEach((el) => {
-    let len = 1;
-    try {
-      len = el.getTotalLength();
-    } catch {
-      len = 1;
-    }
-    const dur = Math.max(0.1, len / speed);
-    plan.push({ el, dur, at: clock });
-    el.style.setProperty('--len', String(len));
-    clock += dur * overlap;
-  });
-  const k = Math.min(1, budget / Math.max(clock, 0.001));
-  for (const p of plan) {
-    p.el.style.setProperty('--dur', `${(p.dur * k).toFixed(3)}s`);
-    p.el.style.setProperty('--delay', `${(p.at * k).toFixed(3)}s`);
-  }
-  (root as HTMLElement).style.setProperty('--total', `${(clock * k + 0.3).toFixed(2)}s`);
-}
-
 /* ---------- Reveal on entry ---------- */
-const targets = document.querySelectorAll<HTMLElement>('[data-reveal], [data-drawing]');
-targets.forEach((el) => {
-  if (el.hasAttribute('data-drawing') && !reduced) measureDrawing(el);
-});
+const targets = document.querySelectorAll<HTMLElement>('[data-reveal]');
 if ('IntersectionObserver' in window && !reduced) {
   const io = new IntersectionObserver(
     (entries) => {
@@ -54,6 +22,41 @@ if ('IntersectionObserver' in window && !reduced) {
   targets.forEach((el) => io.observe(el));
 } else {
   targets.forEach((el) => el.classList.add('is-in'));
+}
+
+/* ---------- Stat counters: count up from 0 the first time each card scrolls in ---------- */
+const counters = document.querySelectorAll<HTMLElement>('[data-count]');
+if (counters.length && 'IntersectionObserver' in window && !reduced) {
+  const DURATION = 1400;
+  const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+  const run = (el: HTMLElement) => {
+    const end = parseInt(el.dataset.count || '', 10);
+    if (!Number.isFinite(end)) return;
+    // Start together with the card's own reveal delay so the number and the card arrive as one.
+    const card = el.closest<HTMLElement>('[data-reveal]');
+    const delay = card ? parseFloat(getComputedStyle(card).getPropertyValue('--d')) * 1000 || 0 : 0;
+    let t0 = 0;
+    const tick = (now: number) => {
+      if (!t0) t0 = now;
+      const p = Math.min(1, (now - t0) / DURATION);
+      el.textContent = String(Math.round(easeOut(p) * end));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    el.textContent = '0';
+    window.setTimeout(() => requestAnimationFrame(tick), delay);
+  };
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          run(e.target as HTMLElement);
+          io.unobserve(e.target);
+        }
+      }
+    },
+    { threshold: 0.4 }
+  );
+  counters.forEach((el) => io.observe(el));
 }
 
 /* ---------- Bottom bar: only once the hero's own buttons have scrolled away ---------- */
@@ -88,3 +91,110 @@ document.querySelectorAll<HTMLElement>('[data-scroller-controls]').forEach((ctl)
   window.addEventListener('resize', sync);
   sync();
 });
+
+/* ---------- Hero parallax: sky and text linger (0.3x / 0.4x), the building cutout rises at 1x ---------- */
+const hero = document.querySelector<HTMLElement>('[data-parallax]');
+if (hero && !reduced) {
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const y = window.scrollY;
+    const limit = hero.offsetHeight;
+    const t = Math.min(y, limit);
+    hero.style.setProperty('--py', `${t * 0.7}px`);
+    hero.style.setProperty('--ty', `${t * 0.6}px`);
+  };
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    },
+    { passive: true }
+  );
+  update();
+}
+
+/* ---------- Photo viewer: one album per service card ---------- */
+type LbItem = { src: string; alt: string; caption: string };
+const lb = document.querySelector<HTMLDialogElement>('[data-lightbox]');
+if (lb && typeof lb.showModal === 'function') {
+  const img = lb.querySelector<HTMLImageElement>('[data-lb-img]')!;
+  const title = lb.querySelector<HTMLElement>('[data-lb-title]')!;
+  const cap = lb.querySelector<HTMLElement>('[data-lb-caption]')!;
+  const count = lb.querySelector<HTMLElement>('[data-lb-count]')!;
+  let items: LbItem[] = [];
+  let cur = 0;
+  let opener: HTMLElement | null = null;
+
+  const preload = (i: number) => {
+    const it = items[((i % items.length) + items.length) % items.length];
+    if (it) new Image().src = it.src;
+  };
+  const show = (i: number) => {
+    const n = items.length;
+    cur = ((i % n) + n) % n;
+    const it = items[cur];
+    if (!reduced) lb.classList.add('is-loading');
+    img.onload = img.onerror = () => lb.classList.remove('is-loading');
+    img.src = it.src;
+    img.alt = it.alt;
+    cap.textContent = it.caption;
+    count.textContent = `${cur + 1} / ${n}`;
+    preload(cur + 1);
+    preload(cur - 1);
+  };
+
+  document.querySelectorAll<HTMLAnchorElement>('a[data-lb-album]').forEach((card) =>
+    card.addEventListener('click', (e) => {
+      const data = document.querySelector<HTMLScriptElement>(`script[data-lb-album="${card.dataset.lbAlbum}"]`);
+      let album: LbItem[] = [];
+      try {
+        album = JSON.parse(data?.textContent || '[]');
+      } catch {
+        return; // fall through to the href
+      }
+      if (!album.length) return;
+      e.preventDefault();
+      items = album;
+      opener = card;
+      title.textContent = data?.dataset.lbTitle || '';
+      show(0);
+      document.documentElement.classList.add('lb-open');
+      lb.showModal();
+    })
+  );
+
+  lb.querySelector('[data-lb-prev]')?.addEventListener('click', () => show(cur - 1));
+  lb.querySelector('[data-lb-next]')?.addEventListener('click', () => show(cur + 1));
+  lb.querySelector('[data-lb-close]')?.addEventListener('click', () => lb.close());
+  lb.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') show(cur + 1);
+    else if (e.key === 'ArrowLeft') show(cur - 1);
+  });
+  // Click on the backdrop or the empty frame around the photo closes.
+  lb.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement;
+    if (t === lb || t.hasAttribute('data-lb-frame')) lb.close();
+  });
+  // Swipe to step on touch screens.
+  let x0 = 0;
+  let y0 = 0;
+  lb.addEventListener('touchstart', (e) => ((x0 = e.touches[0].clientX), (y0 = e.touches[0].clientY)), { passive: true });
+  lb.addEventListener(
+    'touchend',
+    (e) => {
+      const dx = e.changedTouches[0].clientX - x0;
+      const dy = e.changedTouches[0].clientY - y0;
+      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) show(dx < 0 ? cur + 1 : cur - 1);
+    },
+    { passive: true }
+  );
+  lb.addEventListener('close', () => {
+    document.documentElement.classList.remove('lb-open');
+    img.removeAttribute('src');
+    opener?.focus();
+  });
+}

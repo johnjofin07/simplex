@@ -236,6 +236,11 @@ a.photo:focus-visible img {
   margin-top: 6px;
 }
 
+/* Body does not scroll behind the photo lightbox. */
+html.lb-open {
+  overflow: hidden;
+}
+
 /* ---- Reveal (one authored moment: content settles up as it enters) ---- */
 html.js [data-reveal] {
   opacity: 0;

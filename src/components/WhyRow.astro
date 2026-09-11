@@ -11,6 +11,19 @@ import { site } from '../content/site';
         <p class="body">{site.why.sub}</p>
       </div>
     </div>
+
+    <dl class="stats" aria-label="Simplex in numbers">
+      {site.why.stats.map((s, i) => (
+        <div data-reveal style={`--d: ${0.06 * i}s`}>
+          <dd class="value">
+            <span class="num"><span class="digits" data-count={parseInt(s.value, 10)} style={`--w: ${String(parseInt(s.value, 10)).length}ch`}>{parseInt(s.value, 10)}</span>{s.value.replace(/^\d+/, '')}</span>
+            <span class="unit">{s.unit}</span>
+          </dd>
+          <dt class="small muted">{s.text}</dt>
+        </div>
+      ))}
+    </dl>
+
     <ul class="points">
       {site.why.points.map((p, i) => (
         <li data-reveal style={`--d: ${0.08 * i}s`}>
@@ -20,12 +33,60 @@ import { site } from '../content/site';
         </li>
       ))}
     </ul>
+
+    <p class="materials" data-reveal>
+      <span class="label">{site.why.materials.label}</span>
+      <span class="small">{site.why.materials.text}</span>
+      <span class="brands" aria-label="Brands">
+        {site.why.materials.brands.map((b) => <span class="brand">{b}</span>)}
+      </span>
+    </p>
   </div>
 </section>
 
 <style>
-  .points {
+  .stats {
     margin-top: 72px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    row-gap: 32px;
+  }
+  .stats > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 28px 28px 26px;
+    background: var(--white);
+    border-radius: var(--r);
+  }
+  .value {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .num {
+    font-size: clamp(40px, 4vw, 56px);
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Reserve the final digit count so the unit does not drift while the number counts up. */
+  .digits {
+    display: inline-block;
+    min-inline-size: var(--w);
+  }
+  .unit {
+    font-size: var(--small-size);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .points {
+    margin-top: 56px;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     column-gap: var(--gutter);
@@ -44,19 +105,62 @@ import { site } from '../content/site';
   .points p {
     max-width: 22em;
   }
-  @media (max-width: 1100px) {
-    .points {
-      margin-top: 64px;
-    }
+  .materials {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
   }
-  @media (max-width: 720px) {
+  .materials .label {
+    color: var(--ink-2);
+  }
+  .brands {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-size: var(--small-size);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 8px 16px;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--ink);
+  }
+  @media (max-width: 1100px) {
+    .stats {
+      margin-top: 64px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     .points {
       margin-top: 48px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      row-gap: 32px;
     }
   }
-  @media (max-width: 360px) {
+  @media (max-width: 720px) {
+    .stats {
+      margin-top: 48px;
+      row-gap: var(--gutter);
+    }
+    .stats > div {
+      padding: 22px 20px 20px;
+    }
+    .points {
+      margin-top: 40px;
+      row-gap: 32px;
+    }
+    .materials {
+      margin-top: 40px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+  @media (max-width: 400px) {
+    .stats,
     .points {
       grid-template-columns: 1fr;
     }

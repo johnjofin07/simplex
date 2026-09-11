@@ -1,0 +1,116 @@
+# Sveltia CMS config for simplexkdlr.com/admin.
+# Two things to edit after deploying the login worker (see README, "Hosting"):
+#   backend.base_url  -> the sveltia-cms-auth worker URL
+# Everything saved here is committed to the repo on GitHub, which triggers a
+# Cloudflare Pages rebuild; the site updates a couple of minutes later.
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: johnjofin07/simplex
+  branch: main
+  base_url: https://sveltia-cms-auth.REPLACE-ME.workers.dev
+
+site_url: https://simplexkdlr.com
+display_url: https://simplexkdlr.com
+logo_url: https://simplexkdlr.com/logo.png
+
+# Photos are committed into src/assets/photos so Astro can resize and convert
+# them at build time. Phone photos are shrunk in the browser before upload.
+media_folder: /src/assets/photos
+media_libraries:
+  default:
+    config:
+      max_file_size: 25000000
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 2400
+          height: 2400
+
+editor:
+  preview: false
+
+collections:
+  - name: work
+    label: Work photos
+    label_singular: Work photo
+    description: Photos shown in the Work section. Each photo belongs to one service card; tap a card on the site to see its album.
+    folder: /src/content/work
+    create: true
+    format: yaml
+    extension: yml
+    identifier_field: caption
+    summary: '{{caption}}'
+    thumbnail: image
+    sortable_fields: [order, caption, service]
+    fields:
+      - name: image
+        label: Photo
+        widget: image
+      - name: caption
+        label: Caption
+        widget: string
+        hint: One short line, shown under the photo.
+      - name: service
+        label: Service
+        widget: select
+        hint: Which card on the site this photo belongs to.
+        options:
+          - { label: Structural glazing and ACP facades, value: glazing }
+          - { label: Windows and doors, value: windows }
+          - { label: ACP cupboards and wardrobes, value: wardrobes }
+          - { label: Kitchens, value: kitchens }
+          - { label: Interiors and partitions, value: interiors }
+          - { label: Car porches, roofing and renovation, value: porches }
+      - name: cover
+        label: Use as the card cover
+        widget: boolean
+        default: false
+        required: false
+        hint: Only one photo per service should be the cover.
+      - name: order
+        label: Order
+        widget: number
+        value_type: int
+        default: 50
+        hint: Lower numbers come first in the album.
+      - name: alt
+        label: Description for screen readers
+        widget: string
+        required: false
+        hint: Optional. Leave blank to use the caption.
+
+  - name: designs
+    label: 3D designs
+    label_singular: 3D design
+    description: Renders shown in the "You see it finished before we begin" row.
+    folder: /src/content/designs
+    create: true
+    format: yaml
+    extension: yml
+    identifier_field: caption
+    summary: '{{caption}}'
+    thumbnail: image
+    sortable_fields: [order, caption]
+    fields:
+      - name: image
+        label: Render
+        widget: image
+      - name: caption
+        label: Caption
+        widget: string
+        hint: One short line, shown under the image.
+      - name: order
+        label: Order
+        widget: number
+        value_type: int
+        default: 50
+        hint: Lower numbers come first in the row.
+      - name: alt
+        label: Description for screen readers
+        widget: string
+        required: false
+        hint: Optional. Leave blank to use the caption.

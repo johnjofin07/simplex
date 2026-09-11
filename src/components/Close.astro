@@ -17,14 +17,34 @@ const p = photos[site.close.photo];
           <Button href={waHref} variant="secondary" icon="whatsapp" size="lg" class="on-dark">WhatsApp</Button>
         </div>
         <dl class="details">
-          <div><dt class="label">Workshop</dt><dd>{site.address[0]}<br />{site.address[1]}</dd></div>
-          <div><dt class="label">Hours</dt><dd>{site.hours}</dd></div>
+          <div>
+            <dt class="label">Call or WhatsApp</dt>
+            <dd>
+              {site.contacts.map((c) => (
+                <span class="line who"><a href={`tel:${c.phone}`}>{c.display}</a><span class="name">{c.name}</span></span>
+              ))}
+            </dd>
+          </div>
+          <div>
+            <dt class="label">Workshop</dt>
+            <dd>
+              <span class="line">{site.legalName}</span>
+              {site.address.map((l) => <span class="line">{l}</span>)}
+            </dd>
+          </div>
+          <div>
+            <dt class="label">Email and Instagram</dt>
+            <dd>
+              <span class="line"><a href={`mailto:${site.email}`}>{site.email}</a></span>
+              <span class="line"><a href={site.instagram} target="_blank" rel="noopener">{site.instagramHandle}</a></span>
+            </dd>
+          </div>
+          {site.hours && <div><dt class="label">Hours</dt><dd>{site.hours}</dd></div>}
           <div><dt class="label">Service area</dt><dd>{site.serviceArea}</dd></div>
-          {site.email && <div><dt class="label">Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>}
         </dl>
       </div>
       <figure class="photo art">
-        <Image src={p.src} alt={p.alt} widths={[600, 1000, 1600]} sizes="(max-width: 1100px) 100vw, 46vw" format="webp" quality={76} loading="lazy" decoding="async" />
+        <Image src={p.src} alt={p.alt} widths={[600, 1000, 1400]} sizes="(max-width: 1100px) 100vw, 46vw" format="webp" quality={76} loading="lazy" decoding="async" />
       </figure>
     </div>
   </div>
@@ -85,13 +105,29 @@ const p = photos[site.close.photo];
     font-size: var(--small-size);
     line-height: var(--small-lh);
   }
+  .details .line {
+    display: block;
+  }
+  .details .who + .who {
+    margin-top: 6px;
+  }
+  .details .name {
+    display: block;
+    color: var(--on-ink-2);
+  }
+  .details a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
   .art {
     min-height: 420px;
     border-radius: var(--r);
   }
   .art img {
+    position: absolute;
+    inset: 0;
     height: 100%;
-    object-position: 78% center;
+    object-position: 50% 62%;
   }
   @media (max-width: 1100px) {
     .panel {

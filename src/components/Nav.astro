@@ -1,11 +1,15 @@
 ---
 import Button from './Button.astro';
+import Logo from './Logo.astro';
 import { site, telHref, waHref } from '../content/site';
 ---
 
 <header class="nav">
   <div class="wrap row">
-    <a class="wordmark" href="#top" aria-label={`${site.name} — top of page`}>{site.wordmark}</a>
+    <a class="brand" href="#top" aria-label={`${site.name} — top of page`}>
+      <Logo height={34} />
+      <span class="wordmark">{site.wordmark}</span>
+    </a>
     <nav class="links desktop-only" aria-label="Sections">
       {site.nav.map((l) => <a href={l.href}>{l.label}</a>)}
     </nav>
@@ -32,6 +36,12 @@ import { site, telHref, waHref } from '../content/site';
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    justify-self: start;
   }
   .wordmark {
     font-size: 22px;
@@ -74,6 +84,13 @@ import { site, telHref, waHref } from '../content/site';
   @media (max-width: 720px) {
     .row {
       grid-template-columns: 1fr auto;
+    }
+    .brand {
+      gap: 10px;
+    }
+    .brand :global(svg) {
+      height: 28px;
+      width: auto;
     }
     .wordmark {
       font-size: 19px;

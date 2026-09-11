@@ -1,13 +1,31 @@
 ---
+/**
+ * First screen. Three layers (register.ts sets --py and --ty): the sky at the
+ * back and the headline in the middle linger as you scroll, while the building
+ * cutout in front moves with the page, so it rises up over the text.
+ */
 import { Image } from 'astro:assets';
 import Button from './Button.astro';
 import { site, telHref, waHref } from '../content/site';
 import { photos } from '../content/photos';
-const p = photos[site.hero.photo];
+const sky = photos[site.hero.photo];
+const building = photos[site.hero.building];
 ---
 
-<section class="hero wrap" id="top" aria-labelledby="hero-h">
-  <div class="grid top">
+<section class="hero" id="top" aria-labelledby="hero-h" data-parallax>
+  <Image
+    class="bg"
+    src={sky.src}
+    alt={sky.alt}
+    widths={[800, 1200, 1800, 2400]}
+    sizes="100vw"
+    format="webp"
+    quality={72}
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+  />
+  <div class="wrap grid top">
     <h1 id="hero-h" class="display" data-reveal>{site.hero.headline}</h1>
     <div class="aside" data-reveal style="--d: 0.12s">
       <p class="body">{site.hero.sub}</p>
@@ -17,41 +35,76 @@ const p = photos[site.hero.photo];
       </div>
     </div>
   </div>
-
-  <figure class="photo stage" data-reveal style="--d: 0.2s">
-    <Image
-      src={p.src}
-      alt={p.alt}
-      widths={[720, 1200, 1800, 2400]}
-      sizes="(max-width: 1440px) 100vw, 1440px"
-      format="webp"
-      quality={80}
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-    />
-    <figcaption class="cap-card">
-      <span class="h3">{site.hero.caption.title}</span>
-      <span class="small muted">{site.hero.caption.line}</span>
-    </figcaption>
-    <ul class="strip" aria-label="What we make">
-      {site.hero.strip.map((s) => <li>{s}</li>)}
-    </ul>
-  </figure>
+  <Image
+    class="fg"
+    src={building.src}
+    alt={building.alt}
+    widths={[1100, 1600, 2000]}
+    sizes="(max-width: 720px) 1100px, 100vw"
+    format="webp"
+    quality={82}
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+  />
 </section>
 
 <style>
   .hero {
-    padding-top: 72px;
-    padding-bottom: var(--section);
+    position: relative;
+    isolation: isolate;
+    min-height: min(92vh, 980px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-block: 225px 32px;
     background: var(--paper);
-    max-width: none;
+    overflow: hidden;
+  }
+  .bg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 0;
   }
   .top {
-    align-items: end;
+    position: relative;
+    z-index: 1;
+    align-items: start;
     row-gap: 32px;
-    max-width: calc(var(--max) - 2 * var(--margin));
-    margin-inline: auto;
+  }
+  .fg {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    z-index: 2;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    transform: translate3d(-50%, 0, 0);
+    pointer-events: none;
+  }
+  /* Parallax: the sky moves at 0.3x and the text at 0.4x of the scroll speed,
+     so the building (1x) climbs over both. Static under reduced motion. */
+  :global(html.js) .bg {
+    transform: translate3d(0, var(--py, 0px), 0);
+    will-change: transform;
+  }
+  :global(html.js) .top {
+    transform: translate3d(0, var(--ty, 0px), 0);
+    will-change: transform;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(html.js) .bg,
+    :global(html.js) .top {
+      transform: none;
+      will-change: auto;
+    }
   }
   h1 {
     grid-column: 1 / span 8;
@@ -61,7 +114,7 @@ const p = photos[site.hero.photo];
     display: flex;
     flex-direction: column;
     gap: 28px;
-    padding-bottom: 10px;
+    padding-top: 14px;
   }
   .aside p {
     max-width: 24em;
@@ -71,70 +124,30 @@ const p = photos[site.hero.photo];
     flex-wrap: wrap;
     gap: 10px;
   }
-  .stage {
-    margin-top: 56px;
-    max-width: calc(var(--max) - 2 * var(--margin));
-    margin-inline: auto;
-    aspect-ratio: 16 / 9;
-    max-height: 760px;
-    width: 100%;
-  }
-  .stage img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 68% 50%;
-  }
-  .cap-card {
-    position: absolute;
-    left: 24px;
-    bottom: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 16px 22px;
-    background: var(--white);
-    border-radius: var(--r-sm);
-    max-width: min(60%, 420px);
-  }
-  .cap-card .h3 {
-    font-size: 20px;
-  }
-  .strip {
-    position: absolute;
-    right: 24px;
-    bottom: 24px;
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    max-width: 50%;
-  }
-  .strip li {
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    padding: 8px 14px;
-    border-radius: var(--r-pill);
-    background: color-mix(in srgb, var(--white) 82%, transparent);
+  .cta :global(.secondary) {
+    background: color-mix(in srgb, var(--white) 70%, transparent);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
   @media (max-width: 1100px) {
+    .hero {
+      padding-top: 120px;
+    }
     h1 {
       grid-column: 1 / -1;
     }
     .aside {
       grid-column: 1 / span 8;
-      padding-bottom: 0;
-    }
-    .stage {
-      margin-top: 44px;
+      padding-top: 0;
     }
   }
   @media (max-width: 720px) {
     .hero {
-      padding-top: 44px;
+      min-height: min(88vh, 820px);
+      padding-block: 64px 20px;
+    }
+    .fg {
+      width: 1100px;
     }
     .aside {
       grid-column: 1 / -1;
@@ -144,25 +157,6 @@ const p = photos[site.hero.photo];
       height: 54px;
       font-size: 16px;
       flex: 1 1 auto;
-    }
-    .stage {
-      margin-top: 36px;
-      aspect-ratio: 4 / 5;
-      margin-inline: calc(-1 * var(--margin) + 8px);
-      width: auto;
-    }
-    .cap-card {
-      left: 14px;
-      bottom: 14px;
-      right: 14px;
-      max-width: none;
-      padding: 14px 16px;
-    }
-    .cap-card .h3 {
-      font-size: 18px;
-    }
-    .strip {
-      display: none;
     }
   }
 </style>

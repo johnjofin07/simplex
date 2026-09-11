@@ -1,15 +1,45 @@
 ---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
 import { site } from '../content/site';
 const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
-  <div class="wrap row">
-    <a class="wordmark" href="#top">{site.wordmark}</a>
-    <nav class="links" aria-label="Footer">
-      {site.nav.map((l) => <a class="small" href={l.href}>{l.label}</a>)}
-    </nav>
-    <p class="small muted note">© {year} {site.name}. Photographs are demo images, to be replaced.</p>
+  <div class="wrap">
+    <div class="row top">
+      <a class="brand" href="#top" aria-label={`${site.name} — top of page`}>
+        <Logo height={44} />
+        <span class="wordmark">{site.wordmark}</span>
+      </a>
+      <nav class="links" aria-label="Footer">
+        {site.nav.map((l) => <a class="small" href={l.href}>{l.label}</a>)}
+      </nav>
+    </div>
+
+    <div class="row contact">
+      <div class="col">
+        <p class="label">Call or WhatsApp</p>
+        {site.contacts.map((c) => (
+          <p class="small">
+            <a href={`tel:${c.phone}`}>{c.display}</a>
+            <span class="muted"> · {c.name}</span>
+          </p>
+        ))}
+      </div>
+      <div class="col">
+        <p class="label">Workshop</p>
+        <p class="small">{site.legalName}</p>
+        {site.address.map((l) => <p class="small muted">{l}</p>)}
+      </div>
+      <div class="col">
+        <p class="label">Write to us</p>
+        <p class="small"><a href={`mailto:${site.email}`}><Icon name="mail" size={16} /> {site.email}</a></p>
+        <p class="small"><a href={site.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={16} /> {site.instagramHandle}</a></p>
+      </div>
+    </div>
+
+    <p class="small muted note">© {year} {site.legalName}. Kodungallur, Kerala. Since {site.founded}.</p>
   </div>
 </footer>
 
@@ -25,6 +55,14 @@ const year = new Date().getFullYear();
     align-items: center;
     gap: 24px 40px;
   }
+  .top {
+    justify-content: space-between;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
   .wordmark {
     font-size: 18px;
     font-weight: 600;
@@ -38,12 +76,32 @@ const year = new Date().getFullYear();
   .links a {
     font-weight: 600;
   }
-  .links a:hover {
+  .contact {
+    align-items: flex-start;
+    gap: 24px 56px;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .col p {
+    margin: 0;
+  }
+  .col .label {
+    margin-bottom: 8px;
+  }
+  .col a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+  }
+  .links a:hover,
+  .col a:hover {
     text-decoration: underline;
     text-underline-offset: 4px;
   }
   .note {
-    margin-left: auto;
+    margin-top: 32px;
   }
   @media (max-width: 720px) {
     .row {
@@ -51,8 +109,8 @@ const year = new Date().getFullYear();
       align-items: flex-start;
       gap: 18px;
     }
-    .note {
-      margin-left: 0;
+    .contact {
+      gap: 22px;
     }
   }
 </style>

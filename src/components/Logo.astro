@@ -1,0 +1,29 @@
+---
+/**
+ * Simplex mark, redrawn as a single stroked path from the owner's logo
+ * (src/assets/brand/logo-original.png): an arched window with a sun, an S in
+ * a circle and nine bars. Strokes use currentColor so it sits on any ground.
+ * `height` is in px; the mark is 359 x 639 in its own units.
+ */
+interface Props {
+  height?: number;
+  class?: string;
+}
+const { height = 32, class: cls } = Astro.props;
+const width = Math.round((height * 359) / 639);
+---
+
+<svg
+  class={cls}
+  width={width}
+  height={height}
+  viewBox="0 0 359 639"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="14"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d="M6 633V179.5a173.5 173.5 0 0 1 347 0V633ZM6 172.5H353M6 345.5H353M6 508.5H353M94.5 172.5a85 85 0 0 1 170 0M258.0 140.0L339.8 113.1M239.6 112.4L302.2 56.8M212.0 94.0L245.9 19.2M179.5 87.5L179.5 6.0M147.0 94.0L113.1 19.2M119.4 112.4L56.8 56.8M101.0 140.0L19.2 113.1M11.5 340.5a168 168 0 1 0 336 0a168 168 0 1 0-336 0M179.5 172.5a84 84 0 0 0 0 168a84 84 0 0 1 0 168M179.5 172.5V633M40.7 508.5V633M75.4 508.5V633M110.1 508.5V633M144.8 508.5V633M179.5 508.5V633M214.2 508.5V633M248.9 508.5V633M283.6 508.5V633M318.3 508.5V633" />
+</svg>
