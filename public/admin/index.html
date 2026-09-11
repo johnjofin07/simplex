@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light" data-auto-theming="false">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
+    <meta name="color-scheme" content="light" />
     <title>Simplex Aluminium — photo admin</title>
-    <link rel="icon" href="../favicon.ico" />
+    <link rel="icon" href="logo.png" />
     <style>
+      /* The admin is always light. The mark is black line art, so Sveltia's
+         dark theme would put a black logo on a black background. The html
+         attributes above are honoured by Sveltia's app shell; the script
+         below seeds the same choice into its saved preferences. */
+      html, body {
+        background: #fff;
+        color: #1f201e;
+      }
       /* Splash shown while the Sveltia script downloads and boots. Plain HTML
-         so it paints before any JavaScript runs; removed once Sveltia mounts. */
+         so it paints before any JavaScript runs; removed once Sveltia has
+         drawn its own screen (sign-in page or the app). */
       #splash {
         position: fixed;
         inset: 0;
@@ -19,7 +29,7 @@
         justify-content: center;
         gap: 1.25rem;
         background: #fff;
-        color: #111;
+        color: #1f201e;
         font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
         transition: opacity 0.35s ease;
       }
@@ -28,7 +38,7 @@
         pointer-events: none;
       }
       #splash img {
-        width: min(60vw, 260px);
+        width: min(50vw, 200px);
         height: auto;
         animation: splash-pulse 1.6s ease-in-out infinite;
       }
@@ -47,10 +57,25 @@
         #splash { transition: none; }
       }
     </style>
+    <script>
+      // Sveltia stores the theme choice in localStorage and, when it is
+      // "auto" or unset, follows the OS dark mode. Default it to light so the
+      // first visit is white; a theme picked later in Settings still wins.
+      (function () {
+        var key = "sveltia-cms.prefs";
+        try {
+          var prefs = JSON.parse(localStorage.getItem(key) || "{}") || {};
+          if (!prefs.theme || prefs.theme === "auto") {
+            prefs.theme = "light";
+            localStorage.setItem(key, JSON.stringify(prefs));
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="splash" role="status" aria-live="polite">
-      <img src="splash.jpg" alt="" width="884" height="884" />
+      <img src="logo.png" alt="" width="512" height="512" />
       <p>Loading photo admin…</p>
     </div>
 
@@ -68,21 +93,23 @@
           observer.disconnect();
         }
 
-        // Sveltia renders its app into <body>; the first element it adds is
-        // our cue that the UI is up.
-        var observer = new MutationObserver(function (records) {
-          for (var i = 0; i < records.length; i++) {
-            var added = records[i].addedNodes;
-            for (var j = 0; j < added.length; j++) {
-              var node = added[j];
-              if (node.nodeType === 1 && node !== splash && node.tagName !== "SCRIPT") {
-                done();
-                return;
-              }
-            }
+        // Sveltia mounts an empty shell first, then fetches config.yml and
+        // draws the sign-in page or the app. Wait for something interactive
+        // (a button or heading) outside the splash before fading it out, so
+        // Sveltia's own loading state never shows through.
+        function ready() {
+          var els = document.body.querySelectorAll("button, h1, h2, [role=\"main\"]");
+          for (var i = 0; i < els.length; i++) {
+            if (!splash.contains(els[i])) return true;
           }
+          return false;
+        }
+
+        var observer = new MutationObserver(function () {
+          if (ready()) done();
         });
-        observer.observe(document.body, { childList: true });
+        observer.observe(document.body, { childList: true, subtree: true });
+        if (ready()) done();
 
         // Safety nets: never leave the splash stuck over a broken or slow load.
         var cms = document.querySelector('script[src*="sveltia-cms"]');

@@ -189,6 +189,14 @@ const cards = await Promise.all(
     .cards {
       margin-top: 40px;
     }
+    /* On a phone the card is only as wide as the screen: the blurb crowds the
+       photo, so the title and the prompt carry the card on their own. */
+    .cap p {
+      display: none;
+    }
+    .open {
+      margin-top: 8px;
+    }
     .wide,
     .narrow,
     .third,

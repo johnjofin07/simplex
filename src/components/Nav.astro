@@ -16,7 +16,7 @@ import { site, telHref, waHref } from '../content/site';
     </nav>
     <div class="actions">
       <Button href={waHref} variant="ghost" icon="whatsapp" class="desktop-only">WhatsApp</Button>
-      <Button href={telHref} variant="primary" icon="phone">Call now</Button>
+      <Button href={telHref} variant="primary" icon="phone" class="nav-call">Call now</Button>
       <button class="menu-btn mobile-only" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu" aria-label="Sections menu">
         <Icon name="menu" size={22} class="ico-open" />
         <Icon name="close" size={22} class="ico-close" />
@@ -150,6 +150,8 @@ import { site, telHref, waHref } from '../content/site';
       font-size: 16px;
     }
   }
+  /* Below 720px the fixed bottom bar carries Call + WhatsApp, so the header
+     keeps only the menu button (see BottomBar.astro). */
   @media (max-width: 720px) {
     .brand {
       gap: 10px;
@@ -161,10 +163,8 @@ import { site, telHref, waHref } from '../content/site';
     .wordmark {
       font-size: 19px;
     }
-    .actions :global(.btn) {
-      height: 42px;
-      padding-inline: 18px;
-      font-size: 15px;
+    .actions :global(.nav-call) {
+      display: none;
     }
   }
 </style>

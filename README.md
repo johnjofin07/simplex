@@ -63,7 +63,7 @@ src/
   content.config.ts        collection schemas (astro:content)
   assets/photos/           fixed photos + PROVENANCE.md; one subfolder per
                            Gallery card (glazing/, windows/, ...) and designs/
-public/admin/              Sveltia CMS (index.html + config.yml), the phone admin
+public/admin/              Sveltia CMS (index.html, config.yml, logo.png), the phone admin
 ```
 
 ## Hosting

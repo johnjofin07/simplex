@@ -93,7 +93,13 @@ const designs = await designPhotos();
   }
   .scroller {
     margin-top: 64px;
+    /* Horizontal only: the reveal transform on the cards would otherwise make
+       this a vertical scroll container too. The padding gives that transform
+       room to sit inside the clip box; the margin takes the space back. */
     overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 18px;
+    margin-bottom: -18px;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;

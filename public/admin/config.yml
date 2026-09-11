@@ -10,9 +10,13 @@ backend:
   repo: johnjofin07/simplex
   branch: main
 
+app_title: Simplex Aluminium
 site_url: https://simplexkdlr.com
 display_url: https://simplexkdlr.com
-logo_url: https://simplexkdlr.com/logo.png
+# Square mark on a white plate (public/admin/logo.png), so it reads on
+# Sveltia's dark theme too. Shown on the sign-in page, the header and the tab.
+logo:
+  src: /admin/logo.png
 
 # Photos are committed under src/assets/photos so Astro can resize and convert
 # them at build time. Each gallery card keeps its photos in its own subfolder
