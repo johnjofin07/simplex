@@ -31,7 +31,6 @@ Sveltia CMS) land in those subfolders as slugified WebP files and are the owner'
 | `render-bungalow.jpg` | 3D design of a house front with car porch | Render |
 | `render-house.jpg` | 3D design of a pitched-roof house with glazed gables | Render |
 | `render-convention.jpg` | 3D design of a convention centre | Render |
-| `render-office.jpg` | 3D design of a two-storey glazed office | Render |
 | `render-bamboo.jpg` | 3D design of a restaurant facade with louvres | Render |
 | `render-fins.jpg` | 3D design of a two-storey building with sculpted vertical ACP fins over a glazed ground floor, used in the contact panel | Render |
 

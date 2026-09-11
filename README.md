@@ -107,6 +107,11 @@ collections:
 - **3D designs**: photo, caption, order. Photos land in
   `src/assets/photos/designs/`.
 
+To remove a photo, delete it from its card or delete the 3D design entry, not
+just the file. Deleting only the image (from the Assets tab or on GitHub)
+leaves the entry pointing at a file that no longer exists; the build logs a
+warning and leaves that photo off the site until the entry is fixed.
+
 The Assets tab lists one folder per collection, so every card's photos appear
 together under "Gallery cards". The per-card folders below it come from
 `asset_collections` in `public/admin/config.yml`, which is a hand-written list:

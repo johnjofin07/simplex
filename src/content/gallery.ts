@@ -8,11 +8,32 @@ export type Span = 'wide' | 'narrow' | 'third' | 'full';
 const byOrder = <T extends { data: { order: number }; id: string }>(a: T, b: T) =>
   a.data.order - b.data.order || a.id.localeCompare(b.id);
 
-const toPhoto = (p: { image: ImageMetadata; caption: string; alt?: string }): GalleryPhoto => ({
-  src: p.image,
-  alt: p.alt || p.caption,
-  caption: p.caption,
+/**
+ * Every image under src/assets/photos, keyed by the root-relative path the CMS
+ * writes into the YAML (/src/assets/photos/<folder>/<file>).
+ */
+const images = import.meta.glob<ImageMetadata>('/src/assets/photos/**/*.{jpg,jpeg,png,webp,avif,gif}', {
+  eager: true,
+  import: 'default',
 });
+
+/**
+ * Resolves one YAML photo to its image module. Returns null, with a build
+ * warning, when the file is gone: an image deleted from the Assets tab or on
+ * GitHub while an entry still lists it should hide that photo, not break the
+ * site.
+ */
+const toPhoto = (p: { image: string; caption: string; alt?: string }, where: string): GalleryPhoto | null => {
+  const key = p.image.startsWith('/') ? p.image : `/${p.image}`;
+  const src = images[key];
+  if (!src) {
+    console.warn(`[gallery] ${where} lists "${p.image}" but that file is not in the repo; the photo is skipped.`);
+    return null;
+  }
+  return { src, alt: p.alt || p.caption, caption: p.caption };
+};
+
+const present = <T>(x: T | null): x is T => x !== null;
 
 /**
  * Grid shape for the Work cards: a wide+narrow pair, three squares, one
@@ -42,18 +63,29 @@ export function spans(n: number): Span[] {
  * photo in the entry's list. Cards with no photos are left out.
  */
 export async function serviceAlbums() {
-  const entries = (await getCollection('services')).sort(byOrder).filter((e) => {
-    if (e.data.photos.length > 0) return true;
-    console.warn(`[gallery] "${e.data.title}" (src/content/services/${e.id}.yml) has no photos; the card is hidden.`);
-    return false;
-  });
+  const entries = (await getCollection('services'))
+    .sort(byOrder)
+    .map((e) => {
+      const file = `src/content/services/${e.id}.yml`;
+      const album = e.data.photos.map((p) => toPhoto(p, file)).filter(present);
+      if (album.length === 0) console.warn(`[gallery] "${e.data.title}" (${file}) has no photos; the card is hidden.`);
+      return { e, album };
+    })
+    .filter(({ album }) => album.length > 0);
   const shape = spans(entries.length);
-  return entries.map((e, i) => {
-    const album = e.data.photos.map(toPhoto);
-    return { key: e.id, title: e.data.title, text: e.data.text, span: shape[i], cover: album[0], album };
-  });
+  return entries.map(({ e, album }, i) => ({
+    key: e.id,
+    title: e.data.title,
+    text: e.data.text,
+    span: shape[i],
+    cover: album[0],
+    album,
+  }));
 }
 
 export async function designPhotos() {
-  return (await getCollection('designs')).sort(byOrder).map((e) => toPhoto(e.data));
+  return (await getCollection('designs'))
+    .sort(byOrder)
+    .map((e) => toPhoto(e.data, `src/content/designs/${e.id}.yml`))
+    .filter(present);
 }

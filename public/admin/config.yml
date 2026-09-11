@@ -125,6 +125,7 @@ collections:
     media_folder: /src/assets/photos/designs
     public_folder: /src/assets/photos/designs
     create: true
+    delete: true
     format: yaml
     extension: yml
     identifier_field: caption
