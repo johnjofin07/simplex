@@ -1,0 +1,58 @@
+---
+import { site } from '../content/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="wrap row">
+    <a class="wordmark" href="#top">{site.wordmark}</a>
+    <nav class="links" aria-label="Footer">
+      {site.nav.map((l) => <a class="small" href={l.href}>{l.label}</a>)}
+    </nav>
+    <p class="small muted note">© {year} {site.name}. Photographs are demo images, to be replaced.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--greige);
+    padding-block: 40px 48px;
+    border-top: 1px solid var(--line);
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px 40px;
+  }
+  .wordmark {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .links {
+    display: flex;
+    gap: 24px;
+  }
+  .links a {
+    font-weight: 600;
+  }
+  .links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .note {
+    margin-left: auto;
+  }
+  @media (max-width: 720px) {
+    .row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+    }
+    .note {
+      margin-left: 0;
+    }
+  }
+</style>

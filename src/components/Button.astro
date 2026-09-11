@@ -1,0 +1,97 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from '../content/site';
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'ghost' | 'light';
+  icon?: IconName;
+  size?: 'md' | 'lg';
+  class?: string;
+  block?: boolean;
+  label?: string;
+}
+const { href, variant = 'primary', icon, size = 'md', class: cls, block = false, label } = Astro.props;
+const external = href.startsWith('http');
+---
+
+<a
+  class:list={['btn', variant, size, cls, { block }]}
+  href={href}
+  aria-label={label}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+>
+  {icon && <Icon name={icon} size={18} />}
+  <span><slot /></span>
+</a>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: var(--control-h);
+    padding-inline: 26px;
+    border-radius: var(--r-pill);
+    border: 1px solid transparent;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    transition:
+      background-color var(--t-fast) ease,
+      color var(--t-fast) ease,
+      border-color var(--t-fast) ease,
+      transform var(--t-fast) ease;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn:focus-visible {
+    border-radius: var(--r-pill);
+  }
+  .primary {
+    background: var(--ink);
+    color: var(--on-ink);
+    border-color: var(--ink);
+  }
+  .primary:hover {
+    background: var(--line-dark);
+    border-color: var(--line-dark);
+  }
+  .secondary {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  .secondary:hover {
+    background: var(--ink);
+    color: var(--on-ink);
+  }
+  .light {
+    background: var(--white);
+    color: var(--ink);
+    border-color: var(--white);
+  }
+  .light:hover {
+    background: var(--sheet);
+    border-color: var(--sheet);
+  }
+  .ghost {
+    background: transparent;
+    color: var(--ink);
+    padding-inline: 14px;
+  }
+  .ghost:hover {
+    background: rgba(31, 32, 30, 0.07);
+  }
+  .lg {
+    height: 60px;
+    padding-inline: 32px;
+    font-size: 17px;
+  }
+  .block {
+    width: 100%;
+  }
+</style>

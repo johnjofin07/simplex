@@ -1,0 +1,41 @@
+---
+/** 1.5px line icons, 24px box, one hand. */
+import type { IconName } from '../content/site';
+interface Props {
+  name: IconName;
+  size?: number;
+  class?: string;
+}
+const { name, size = 24, class: cls } = Astro.props;
+const paths: Record<IconName, string> = {
+  tape: 'M3 8.5h13a4.5 4.5 0 0 1 0 9H8M3 8.5v9h5M6 8.5v3M9 8.5v2M12 8.5v3M15 8.5v2',
+  workshop: 'M3 20h18M5 20V9l7-5 7 5v11M9 20v-6h6v6M12 4v3',
+  seal: 'M4 5h16v14H4zM4 12h16M8 5v14M16 5v14M8 12l4-3 4 3',
+  broom: 'M14 3l7 7M11 6l7 7M6.5 10.5l7 7L9 21H4v-5z',
+  home: 'M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6',
+  kitchen: 'M3 4h18v16H3zM3 12h18M12 4v8M8 15h2M14 15h2',
+  shop: 'M3 9l1.5-5h15L21 9M3 9v11h18V9M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M9 20v-6h6v6',
+  office: 'M3 21h18M5 21V4h9v17M14 9h5v12M8 8h3M8 12h3M8 16h3',
+  balcony: 'M3 12h18M3 12v8h18v-8M6 12v8M10 12v8M14 12v8M18 12v8M5 12V5l7-2 7 2v7',
+  phone: 'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z',
+  whatsapp: 'M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3zM9 8.5c.2-.5.5-.5.8-.5h.5l.7 1.7-.6.8c.5 1 1.6 2.1 2.7 2.6l.8-.7 1.7.8v.6c0 .3-.1.6-.5.9-.6.4-1.3.4-2 .2-2-.7-3.7-2.3-4.4-4.3-.2-.7-.1-1.5.3-2.1z',
+  arrow: 'M5 12h14M13 6l6 6-6 6',
+  'arrow-left': 'M19 12H5M11 6l-6 6 6 6',
+};
+---
+
+<svg
+  class={cls}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d={paths[name]} />
+</svg>

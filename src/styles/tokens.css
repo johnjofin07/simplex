@@ -1,0 +1,68 @@
+/* Simplex Aluminium — design tokens.
+   Greige page, off-white sheets, white cards, charcoal ink. Photographs carry
+   every other colour. One humanist sans at two weights. */
+:root {
+  /* Colour */
+  --greige: #e3e3de;
+  --sheet: #f1f1ed;
+  --paper: #fafaf8;
+  --white: #ffffff;
+  --ink: #1f201e;
+  --ink-2: #5c5e5a;
+  --line: #d2d2cc;
+  --line-dark: #3a3b38;
+  --on-ink: #f4f4f1;
+  --on-ink-2: #b9bab5;
+
+  /* Type */
+  --font: 'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif;
+  --display-size: clamp(42px, 5.3vw, 78px);
+  --display-lh: 1.02;
+  --display-track: -0.025em;
+  --h2-size: clamp(32px, 3.7vw, 54px);
+  --h2-lh: 1.08;
+  --h2-track: -0.018em;
+  --h3-size: 22px;
+  --body-size: 18px;
+  --body-lh: 27px;
+  --small-size: 15px;
+  --small-lh: 22px;
+  --label-size: 13px;
+  --label-track: 0.09em;
+
+  /* Layout */
+  --max: 1440px;
+  --margin: 48px;
+  --gutter: 24px;
+  --section: 128px;
+  --nav-h: 80px;
+  --control-h: 52px;
+  --bottombar-h: 64px;
+
+  /* Shape */
+  --r: 14px;
+  --r-sm: 8px;
+  --r-pill: 999px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 0.18s;
+  --t-reveal: 0.9s;
+}
+
+@media (max-width: 1100px) {
+  :root {
+    --margin: 32px;
+    --section: 96px;
+  }
+}
+@media (max-width: 720px) {
+  :root {
+    --margin: 20px;
+    --gutter: 16px;
+    --section: 72px;
+    --nav-h: 64px;
+    --body-size: 17px;
+    --body-lh: 26px;
+  }
+}

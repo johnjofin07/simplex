@@ -1,0 +1,128 @@
+---
+import { Image } from 'astro:assets';
+import Button from './Button.astro';
+import { site, waHref } from '../content/site';
+import { photos } from '../content/photos';
+---
+
+<section class="band paper" id="work" aria-labelledby="work-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="work-h" class="h2" data-reveal style="--d: 0.06s">{site.services.headline}</h2>
+      <div class="aside" data-reveal style="--d: 0.12s">
+        <p class="body">{site.services.sub}</p>
+        <Button href={waHref} icon="whatsapp">Send us a photo of the room</Button>
+      </div>
+    </div>
+
+    <ul class="cards">
+      {site.services.items.map((s, i) => {
+        const p = photos[s.photo];
+        return (
+          <li class={s.span} data-reveal style={`--d: ${0.06 * (i % 3)}s`}>
+            <a class="photo card" href={waHref} target="_blank" rel="noopener" aria-label={`${s.title} — ask on WhatsApp`}>
+              <Image
+                src={p.src}
+                alt={p.alt}
+                widths={[480, 800, 1200, 1800]}
+                sizes={s.span === 'full' ? '(max-width: 1440px) 100vw, 1440px' : s.span === 'wide' ? '(max-width: 720px) 100vw, 60vw' : '(max-width: 720px) 100vw, 34vw'}
+                format="webp"
+                quality={76}
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="scrim" />
+              <span class="cap">
+                <span class="h3">{s.title}</span>
+                <p class="small">{s.text}</p>
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .cards {
+    margin-top: 72px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gutter);
+  }
+  .cards li {
+    min-width: 0;
+  }
+  .card {
+    display: block;
+    height: 100%;
+  }
+  .wide {
+    grid-column: span 7;
+  }
+  .narrow {
+    grid-column: span 5;
+  }
+  .third {
+    grid-column: span 4;
+  }
+  .full {
+    grid-column: 1 / -1;
+  }
+  .wide .card,
+  .narrow .card {
+    aspect-ratio: 4 / 3;
+  }
+  .narrow .card {
+    aspect-ratio: auto;
+  }
+  .third .card {
+    aspect-ratio: 1 / 1;
+  }
+  .full .card {
+    aspect-ratio: 21 / 8;
+  }
+  .full .cap p {
+    max-width: 40em;
+  }
+  @media (max-width: 1100px) {
+    .cards {
+      margin-top: 56px;
+    }
+    .wide,
+    .narrow {
+      grid-column: span 6;
+    }
+    .wide .card,
+    .narrow .card {
+      aspect-ratio: 4 / 3;
+    }
+    .third {
+      grid-column: span 6;
+    }
+    .third:last-of-type {
+      grid-column: span 6;
+    }
+    .full .card {
+      aspect-ratio: 16 / 9;
+    }
+  }
+  @media (max-width: 720px) {
+    .cards {
+      margin-top: 40px;
+    }
+    .wide,
+    .narrow,
+    .third,
+    .full {
+      grid-column: 1 / -1;
+    }
+    .wide .card,
+    .narrow .card,
+    .third .card,
+    .full .card {
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>

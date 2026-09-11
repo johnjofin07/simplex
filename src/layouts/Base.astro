@@ -1,0 +1,50 @@
+---
+import '@fontsource-variable/source-sans-3/wght.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import { site } from '../content/site';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+
+// TODO(owner): the LocalBusiness record is built from placeholders in site.ts.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: site.name,
+  url: site.siteUrl,
+  telephone: site.phone,
+  address: { '@type': 'PostalAddress', streetAddress: site.address[0], addressLocality: site.address[1] },
+  areaServed: site.serviceArea,
+  openingHours: site.hours,
+  description,
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#e3e3de" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={site.siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+    <script>
+      import '../scripts/register';
+    </script>
+  </body>
+</html>

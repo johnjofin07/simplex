@@ -1,0 +1,43 @@
+---
+import Button from './Button.astro';
+import { telHref, waHref } from '../content/site';
+---
+
+<div class="bar" data-bottombar>
+  <Button href={telHref} icon="phone" block>Call now</Button>
+  <Button href={waHref} variant="light" icon="whatsapp" block>WhatsApp</Button>
+</div>
+
+<style>
+  .bar {
+    display: none;
+  }
+  @media (max-width: 720px) {
+    .bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 40;
+      display: flex;
+      gap: 8px;
+      padding: 8px var(--margin) calc(8px + env(safe-area-inset-bottom, 0px));
+      background: color-mix(in srgb, var(--greige) 90%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--line);
+      transition: transform 0.35s var(--ease);
+    }
+    :global(html.js) .bar:not(.is-on) {
+      transform: translateY(110%);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bar {
+        transition: none;
+      }
+    }
+    .bar :global(.btn) {
+      height: 48px;
+    }
+  }
+</style>

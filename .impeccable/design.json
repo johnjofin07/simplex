@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-11T12:00:00Z",
+  "title": "Design System: Simplex Aluminium",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "primary", "displayName": "Charcoal Ink", "canonical": "#1f201e", "tonalRamp": ["oklch(15% 0.004 110)", "oklch(26% 0.004 110)", "oklch(38% 0.004 110)", "oklch(49% 0.004 110)", "oklch(61% 0.004 110)", "oklch(72% 0.004 110)", "oklch(84% 0.004 110)", "oklch(95% 0.004 110)"] },
+      "line-dark": { "role": "primary", "displayName": "Ink Hover", "canonical": "#3a3b38", "tonalRamp": ["oklch(15% 0.004 110)", "oklch(26% 0.004 110)", "oklch(38% 0.004 110)", "oklch(49% 0.004 110)", "oklch(61% 0.004 110)", "oklch(72% 0.004 110)", "oklch(84% 0.004 110)", "oklch(95% 0.004 110)"] },
+      "greige": { "role": "neutral", "displayName": "Greige Page", "canonical": "#e3e3de", "tonalRamp": ["oklch(15% 0.005 105)", "oklch(26% 0.005 105)", "oklch(38% 0.005 105)", "oklch(49% 0.005 105)", "oklch(61% 0.005 105)", "oklch(72% 0.005 105)", "oklch(84% 0.005 105)", "oklch(95% 0.005 105)"] },
+      "sheet": { "role": "neutral", "displayName": "Sheet", "canonical": "#f1f1ed", "tonalRamp": ["oklch(15% 0.005 105)", "oklch(26% 0.005 105)", "oklch(38% 0.005 105)", "oklch(49% 0.005 105)", "oklch(61% 0.005 105)", "oklch(72% 0.005 105)", "oklch(84% 0.005 105)", "oklch(95% 0.005 105)"] },
+      "paper": { "role": "neutral", "displayName": "Paper", "canonical": "#fafaf8", "tonalRamp": ["oklch(15% 0.003 105)", "oklch(26% 0.003 105)", "oklch(38% 0.003 105)", "oklch(49% 0.003 105)", "oklch(61% 0.003 105)", "oklch(72% 0.003 105)", "oklch(84% 0.003 105)", "oklch(95% 0.003 105)"] },
+      "white": { "role": "neutral", "displayName": "White", "canonical": "#ffffff", "tonalRamp": ["oklch(15% 0 0)", "oklch(26% 0 0)", "oklch(38% 0 0)", "oklch(49% 0 0)", "oklch(61% 0 0)", "oklch(72% 0 0)", "oklch(84% 0 0)", "oklch(95% 0 0)"] },
+      "ink-2": { "role": "neutral", "displayName": "Secondary Text", "canonical": "#5c5e5a", "tonalRamp": ["oklch(15% 0.006 120)", "oklch(26% 0.006 120)", "oklch(38% 0.006 120)", "oklch(49% 0.006 120)", "oklch(61% 0.006 120)", "oklch(72% 0.006 120)", "oklch(84% 0.006 120)", "oklch(95% 0.006 120)"] },
+      "line": { "role": "neutral", "displayName": "Rule", "canonical": "#d2d2cc", "tonalRamp": ["oklch(15% 0.007 105)", "oklch(26% 0.007 105)", "oklch(38% 0.007 105)", "oklch(49% 0.007 105)", "oklch(61% 0.007 105)", "oklch(72% 0.007 105)", "oklch(84% 0.007 105)", "oklch(95% 0.007 105)"] },
+      "on-ink": { "role": "neutral", "displayName": "On-Ink", "canonical": "#f4f4f1", "tonalRamp": ["oklch(15% 0.004 105)", "oklch(26% 0.004 105)", "oklch(38% 0.004 105)", "oklch(49% 0.004 105)", "oklch(61% 0.004 105)", "oklch(72% 0.004 105)", "oklch(84% 0.004 105)", "oklch(95% 0.004 105)"] },
+      "on-ink-2": { "role": "neutral", "displayName": "On-Ink Muted", "canonical": "#b9bab5", "tonalRamp": ["oklch(15% 0.005 110)", "oklch(26% 0.005 110)", "oklch(38% 0.005 110)", "oklch(49% 0.005 110)", "oklch(61% 0.005 110)", "oklch(72% 0.005 110)", "oklch(84% 0.005 110)", "oklch(95% 0.005 110)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero h1 only; balanced wrap, left eight columns." },
+      "headline": { "displayName": "Headline", "purpose": "Every section h2 including the Close panel; nothing sits above it." },
+      "title": { "displayName": "Title", "purpose": "h3 for Why points, photo captions, Spaces cards, process steps." },
+      "body": { "displayName": "Body", "purpose": "Section-head paragraphs and process copy, 24–34em measure; 17/26px under 720px." },
+      "small": { "displayName": "Small", "purpose": "Supporting copy under h3s, caption lines, footer links, definition descriptions." },
+      "label": { "displayName": "Label", "purpose": "Process step numerals and Close-panel definition terms only; never a heading kicker." },
+      "control": { "displayName": "Control", "purpose": "Buttons and nav links; 17px in large buttons." }
+    },
+    "fonts": [
+      { "family": "Source Sans 3 Variable", "source": "@fontsource-variable/source-sans-3/wght.css (self-hosted)", "weightsUsed": [400, 600] },
+      { "family": "Source Sans Fallback", "source": "local('Helvetica Neue'), local('Arial')", "sizeAdjust": "101%", "ascentOverride": "96%", "descentOverride": "26%", "purpose": "Metric-matched fallback so the layout does not shift before the variable font loads." }
+    ],
+    "shadows": [],
+    "gradients": [
+      { "name": "caption-scrim", "value": "linear-gradient(to top, rgba(20, 21, 19, 0.72), rgba(20, 21, 19, 0))", "purpose": "Lower 62% of a photo panel, only where caption text sits on the photograph. The single gradient in the system." }
+    ],
+    "translucency": [
+      { "name": "nav-glass", "value": "color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: saturate(140%) blur(12px)", "purpose": "Sticky nav over scrolling content." },
+      { "name": "bottombar-glass", "value": "color-mix(in srgb, var(--greige) 90%, transparent); backdrop-filter: blur(12px)", "purpose": "Fixed mobile bottom bar." },
+      { "name": "chip-glass", "value": "color-mix(in srgb, var(--white) 82%, transparent); backdrop-filter: blur(8px)", "purpose": "Hero strip chips over the photograph." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Spring-out ease for every authored motion (reveal, photo hover, nav underline, bottom bar, scroller thumb)." },
+      { "name": "t-fast", "value": "0.18s", "purpose": "Button and step-button colour and transform transitions (linear ease)." },
+      { "name": "t-reveal", "value": "0.9s", "purpose": "Entry reveal: opacity 0 to 1 and translateY(18px) to none, staggered by --d (0.06s to 0.2s)." },
+      { "name": "reveal-offset", "value": "18px", "purpose": "Distance content settles upward on entry." },
+      { "name": "photo-hover", "value": "transform: scale(1.03); transition 1.2s var(--ease)", "purpose": "Linked photo panels on hover and focus-visible." },
+      { "name": "nav-underline", "value": "transform: scaleX(0) to scaleX(1), 0.25s var(--ease), origin left", "purpose": "Desktop nav link hover/focus." },
+      { "name": "bottombar-slide", "value": "translateY(110%) to none, 0.35s var(--ease)", "purpose": "Mobile bottom bar once the hero CTA leaves the viewport." },
+      { "name": "scroller-thumb", "value": "transform 0.4s var(--ease)", "purpose": "Spaces scroller progress thumb." },
+      { "name": "drawing-draw", "value": "stroke-dashoffset from measured length to 0; 1600 units/s, 30% overlap, 2.2s budget, linear", "purpose": "Section drawing strokes draw along real path lengths; labels and cut-outs appear after --total." },
+      { "name": "reduced-motion", "value": "prefers-reduced-motion: reduce renders reveal, drawing, photo hover and bottom bar already settled; scroll-behavior auto", "purpose": "Everything is simply there." }
+    ],
+    "breakpoints": [
+      { "name": "tablet", "value": "1100px", "purpose": "Margin 32px, section 96px; section head stacks to 8 columns; services 6-col; process stacks; close panel stacks." },
+      { "name": "mobile", "value": "720px", "purpose": "Margin 20px, gutter 16px, section 72px, nav 64px, body 17/26px; bottom bar on; hero 4:5; nav links hidden." },
+      { "name": "narrow", "value": "360px", "purpose": "Why row collapses to one column." }
+    ],
+    "layout": {
+      "maxWidth": "1440px",
+      "columns": 12,
+      "sectionHead": "h2 columns 1–7, aside columns 9–12, align end, 24px row gap",
+      "headToContent": "72px desktop, 56–64px tablet, 36–48px mobile",
+      "bandPadding": "128px / 96px / 72px",
+      "heroTop": "72px / 44px mobile",
+      "heroStage": "16:9 max-height 760px inside margins; 4:5 within 8px of the viewport edge on mobile",
+      "spacesCard": "318px wide (78vw mobile), min-height 300px (240px mobile)",
+      "focus": "outline 2px solid var(--ink); outline-offset 3px; border-radius 8px (pill on buttons)"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Charcoal pill with an 18px line icon; Call in nav, hero and bottom bar.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z\"/></svg><span>Call now</span></a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding-inline: 26px; border-radius: 999px; border: 1px solid transparent; font-family: 'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; line-height: 1; white-space: nowrap; text-decoration: none; transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease; } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 2px solid #1f201e; outline-offset: 3px; } .ds-btn-primary { background: #1f201e; color: #f4f4f1; border-color: #1f201e; } .ds-btn-primary:hover { background: #3a3b38; border-color: #3a3b38; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outlined pill that inverts to ink on hover; WhatsApp beside the hero Call.",
+      "html": "<a class=\"ds-btn ds-btn-secondary\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3zM9 8.5c.2-.5.5-.5.8-.5h.5l.7 1.7-.6.8c.5 1 1.6 2.1 2.7 2.6l.8-.7 1.7.8v.6c0 .3-.1.6-.5.9-.6.4-1.3.4-2 .2-2-.7-3.7-2.3-4.4-4.3-.2-.7-.1-1.5.3-2.1z\"/></svg><span>WhatsApp</span></a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding-inline: 26px; border-radius: 999px; border: 1px solid transparent; font-family: 'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; line-height: 1; white-space: nowrap; text-decoration: none; transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease; } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 2px solid #1f201e; outline-offset: 3px; } .ds-btn-secondary { background: transparent; color: #1f201e; border-color: #1f201e; } .ds-btn-secondary:hover { background: #1f201e; color: #f4f4f1; }"
+    },
+    {
+      "name": "Light Button",
+      "kind": "button",
+      "refersTo": "button-light",
+      "description": "White pill for charcoal grounds: Close panel Call and the mobile bottom-bar WhatsApp.",
+      "html": "<div style=\"background:#1f201e;padding:24px;border-radius:24px;display:inline-block\"><a class=\"ds-btn ds-btn-light\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z\"/></svg><span>Call +1 555 555 0100</span></a></div>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding-inline: 26px; border-radius: 999px; border: 1px solid transparent; font-family: 'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; line-height: 1; white-space: nowrap; text-decoration: none; transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease; } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 2px solid #f4f4f1; outline-offset: 3px; } .ds-btn-light { background: #ffffff; color: #1f201e; border-color: #ffffff; } .ds-btn-light:hover { background: #f1f1ed; border-color: #f1f1ed; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Borderless pill with a 7% ink wash on hover; desktop nav WhatsApp only.",
+      "html": "<a class=\"ds-btn ds-btn-ghost\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3zM9 8.5c.2-.5.5-.5.8-.5h.5l.7 1.7-.6.8c.5 1 1.6 2.1 2.7 2.6l.8-.7 1.7.8v.6c0 .3-.1.6-.5.9-.6.4-1.3.4-2 .2-2-.7-3.7-2.3-4.4-4.3-.2-.7-.1-1.5.3-2.1z\"/></svg><span>WhatsApp</span></a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding-inline: 26px; border-radius: 999px; border: 1px solid transparent; font-family: 'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; line-height: 1; white-space: nowrap; text-decoration: none; transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease; } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 2px solid #1f201e; outline-offset: 3px; } .ds-btn-ghost { background: transparent; color: #1f201e; padding-inline: 14px; } .ds-btn-ghost:hover { background: rgba(31, 32, 30, 0.07); }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Sticky 80px bar on translucent paper: tracked wordmark, centred 600 links with a scaling underline, ghost and primary pills.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-nav-mark\" href=\"#\">/SIMPLEX</a><nav class=\"ds-nav-links\"><a href=\"#\">Work</a><a href=\"#\">Why us</a><a href=\"#\">Process</a><a href=\"#\">Contact</a></nav><div class=\"ds-nav-actions\"><a class=\"ds-nav-ghost\" href=\"#\">WhatsApp</a><a class=\"ds-nav-primary\" href=\"#\">Call now</a></div></header>",
+      "css": ".ds-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 80px; padding-inline: 48px; background: rgba(250, 250, 248, 0.88); backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px); border-bottom: 1px solid #d2d2cc; color: #1f201e; font-family: 'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif; } .ds-nav a { color: inherit; text-decoration: none; } .ds-nav-mark { font-size: 22px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; } .ds-nav-links { display: flex; gap: 36px; } .ds-nav-links a { position: relative; font-size: 16px; font-weight: 600; padding-block: 6px; } .ds-nav-links a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: #1f201e; transform: scaleX(0); transform-origin: left; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav-links a:hover::after, .ds-nav-links a:focus-visible::after { transform: scaleX(1); } .ds-nav-actions { justify-self: end; display: flex; gap: 8px; align-items: center; } .ds-nav-ghost, .ds-nav-primary { display: inline-flex; align-items: center; height: 52px; border-radius: 999px; border: 1px solid transparent; font-size: 16px; font-weight: 600; line-height: 1; transition: background-color 0.18s ease, color 0.18s ease; } .ds-nav-ghost { padding-inline: 14px; } .ds-nav-ghost:hover { background: rgba(31, 32, 30, 0.07); } .ds-nav-primary { padding-inline: 26px; background: #1f201e; color: #f4f4f1; border-color: #1f201e; } .ds-nav-primary:hover { background: #3a3b38; border-color: #3a3b38; }"
+    },
+    {
+      "name": "Spaces Card",
+      "kind": "card",
+      "refersTo": "card-white",
+      "description": "White 14px card with an ink icon disc top and title plus muted copy bottom; one card per row is inverted to charcoal.",
+      "html": "<div style=\"display:flex;gap:24px;background:#e3e3de;padding:24px\"><div class=\"ds-card\"><span class=\"ds-disc\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6\"/></svg></span><div><h3 class=\"ds-card-title\">Homes and flats</h3><p class=\"ds-card-text\">Windows that seal, doors that glide, wardrobes that last.</p></div></div><div class=\"ds-card ds-card-dark\"><span class=\"ds-disc\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 4h18v16H3zM3 12h18M12 4v8M8 15h2M14 15h2\"/></svg></span><div><h3 class=\"ds-card-title\">Kitchens</h3><p class=\"ds-card-text\">Shutters and frames that shrug off steam, heat and daily wiping.</p></div></div></div>",
+      "css": ".ds-card { flex: none; width: 318px; min-height: 300px; padding: 26px; border-radius: 14px; background: #ffffff; color: #1f201e; display: flex; flex-direction: column; justify-content: space-between; gap: 56px; font-family: 'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif; } .ds-card-title { margin: 0; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: -0.005em; } .ds-card-text { margin: 10px 0 0; font-size: 15px; line-height: 22px; color: #5c5e5a; } .ds-disc { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: #1f201e; color: #f4f4f1; } .ds-card-dark { background: #1f201e; color: #f4f4f1; } .ds-card-dark .ds-card-text { color: #b9bab5; } .ds-card-dark .ds-disc { background: #ffffff; color: #1f201e; }"
+    },
+    {
+      "name": "Photo Panel",
+      "kind": "custom",
+      "refersTo": "photo-panel",
+      "description": "Rounded photograph with a bottom scrim and white title; the Services grid and the page's signature container. Image scales 1.03 on hover.",
+      "html": "<a class=\"ds-photo\" href=\"#\"><span class=\"ds-photo-img\"></span><span class=\"ds-photo-scrim\"></span><span class=\"ds-photo-cap\"><span class=\"ds-photo-title\">Windows</span><p class=\"ds-photo-text\">Sliding and casement windows, sealed against weather.</p></span></a>",
+      "css": ".ds-photo { position: relative; display: block; width: 420px; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 14px; background: #d2d2cc; isolation: isolate; text-decoration: none; font-family: 'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif; } .ds-photo-img { position: absolute; inset: 0; background: linear-gradient(135deg, #8a8f86, #c9ccc4); transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-photo:hover .ds-photo-img, .ds-photo:focus-visible .ds-photo-img { transform: scale(1.03); } .ds-photo-scrim { position: absolute; inset: auto 0 0 0; height: 62%; background: linear-gradient(to top, rgba(20, 21, 19, 0.72), rgba(20, 21, 19, 0)); pointer-events: none; } .ds-photo-cap { position: absolute; left: 24px; right: 24px; bottom: 22px; color: #f4f4f1; } .ds-photo-title { display: block; color: #ffffff; font-size: 22px; line-height: 1.2; font-weight: 600; letter-spacing: -0.005em; } .ds-photo-text { margin: 6px 0 0; font-size: 15px; line-height: 22px; opacity: 0.86; max-width: 30em; } .ds-photo:focus-visible { outline: 2px solid #1f201e; outline-offset: 3px; }"
+    },
+    {
+      "name": "Caption Pill",
+      "kind": "chip",
+      "refersTo": "caption-pill",
+      "description": "White pill at 16px inset on Process photographs; small 400 copy in ink.",
+      "html": "<div style=\"position:relative;width:360px;height:160px;border-radius:14px;background:#9a9d96;overflow:hidden\"><span class=\"ds-cap-pill\">Measured before anything is cut</span></div>",
+      "css": ".ds-cap-pill { position: absolute; left: 16px; bottom: 16px; padding: 8px 14px; background: #ffffff; color: #1f201e; border-radius: 999px; font-family: 'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 22px; }"
+    },
+    {
+      "name": "Hero Strip Chip",
+      "kind": "chip",
+      "refersTo": "chip-strip",
+      "description": "Translucent white chips over the hero photograph naming what Simplex makes; static, desktop only.",
+      "html": "<div style=\"position:relative;width:420px;height:120px;border-radius:14px;background:#7d827a;overflow:hidden\"><ul class=\"ds-strip\"><li>Windows</li><li>Doors</li><li>Wardrobes</li><li>Kitchens</li><li>Interiors</li></ul></div>",
+      "css": ".ds-strip { position: absolute; right: 24px; bottom: 24px; margin: 0; padding: 0; list-style: none; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; max-width: 50%; font-family: 'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif; } .ds-strip li { font-size: 14px; font-weight: 600; letter-spacing: 0.04em; padding: 8px 14px; border-radius: 999px; color: #1f201e; background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }"
+    },
+    {
+      "name": "Step Button",
+      "kind": "button",
+      "refersTo": "step-button",
+      "description": "44px outlined disc with an 18px arrow for the Spaces scroller; fills ink on hover, fades to 30% when disabled.",
+      "html": "<div class=\"ds-steps\"><button class=\"ds-step\" type=\"button\" aria-label=\"Previous\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19 12H5M11 6l-6 6 6 6\"/></svg></button><span class=\"ds-track\"><span class=\"ds-thumb\"></span></span><button class=\"ds-step\" type=\"button\" aria-label=\"Next\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></button></div>",
+      "css": ".ds-steps { display: flex; align-items: center; gap: 14px; width: 320px; } .ds-step { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #1f201e; background: transparent; color: #1f201e; padding: 0; cursor: pointer; display: grid; place-items: center; transition: background-color 0.18s ease, color 0.18s ease, opacity 0.18s ease; } .ds-step:hover { background: #1f201e; color: #f4f4f1; } .ds-step:focus-visible { outline: 2px solid #1f201e; outline-offset: 3px; } .ds-step[disabled] { opacity: 0.3; pointer-events: none; } .ds-track { flex: 1; height: 1px; background: #d2d2cc; position: relative; } .ds-thumb { position: absolute; top: -1px; left: 0; height: 3px; width: 40%; background: #1f201e; border-radius: 2px; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Product Catalogue for a Room",
+    "overview": "Simplex is presented the way a logistics product company presents its containers: one large, untinted photograph of the glazing itself under a plain headline, then photo-led panels for each service. The page itself is a quiet greige ground with three off-white steps and white cards; it has no accent hue at all. Every chromatic value on the page comes from a photograph, and the photographs are shown as they were taken. The charcoal ink does all the pointing: it is the text, the buttons, the icon discs, one dark card in a row, and the closing panel.\n\nDensity is generous and grid-led. Sections are long bands (128px of vertical padding at desktop) headed by a single h2 on the left seven columns and a short paragraph, sometimes with a button or a control, on the right four. There are no eyebrow labels, kickers or section numbers above headings: each zone is named by its literal noun in the heading and nothing else. Hierarchy is carried by one humanist sans, Source Sans 3, at exactly two weights, 600 for anything that names or acts and 400 for anything that explains.\n\nThe world rejects the fabricator default it was built against: no dark facade hero, no orange quote button, no icon-tile services, no box-shadows, no gradients except the scrim that makes photo captions legible. Depth is tonal (greige, sheet, paper, white) and linear (1px rules). Motion is a single grammar: content settles upward 18px as it enters, the technical section drawing draws itself along its real path lengths, and under reduced motion everything is simply already there.",
+    "keyCharacteristics": [
+      "Four flat neutral surfaces (greige, sheet, paper, white) and one charcoal ink; photographs supply every other colour.",
+      "One typeface, two weights (600 / 400); tight negative tracking at display sizes, no tracked caps above headings.",
+      "12-column grid inside a 1440px wrap; section heads split 7 / 4; content sits 72px below the head.",
+      "Rounded photo panels and cards (14px), pill buttons, circular icon discs, a 24px closing panel; no shadows anywhere.",
+      "One 1.5px-stroke line-icon set drawn in a 24px box, always in ink or its inverse.",
+      "One reveal motion (18px settle, 0.9s, spring-out ease) plus a self-drawing technical section; everything settled under reduced motion."
+    ],
+    "rules": [
+      { "name": "The Photographs Carry Colour Rule", "body": "The palette has no accent hue. Any saturated colour on the page must come from an untinted photograph; never add a brand accent, tint an image, or colour an icon.", "section": "colors" },
+      { "name": "The Band Ladder Rule", "body": "Bands are greige, sheet or paper and adjacent bands never share a surface. White is reserved for objects sitting on a band (cards, caption cards, pills) and is never itself a band.", "section": "colors" },
+      { "name": "The Ink Object Rule", "body": "Charcoal is applied to objects, never to bands: buttons, discs, one dark card per row, and the rounded Close panel inside its paper band. There is no full-bleed dark section.", "section": "colors" },
+      { "name": "The Two Weights Rule", "body": "600 names and acts; 400 explains. No other weight is loaded or used, and no italic exists.", "section": "typography" },
+      { "name": "The Headline-Alone Rule", "body": "No eyebrow, kicker, slash-label or numeral sits above an h2 or h1 (user decision 2026-09-11). Sections are carried by the heading noun and the paragraph beside it.", "section": "typography" },
+      { "name": "The Tracked-Caps Budget Rule", "body": "Uppercase tracked type appears in exactly three places: the wordmark, the label role (step numerals, definition terms) and the annotations inside the technical drawing. Nowhere else.", "section": "typography" },
+      { "name": "The No-Shadow Rule", "body": "Surfaces never cast shadows, in any state. If an element needs to separate from its ground, step its surface one rung up the ladder or draw a 1px rule.", "section": "elevation" },
+      { "name": "The Scrim-Only Gradient Rule", "body": "The single permitted gradient is the caption scrim under text on a photograph. No gradient is decorative.", "section": "elevation" },
+      { "name": "The Floating Chrome Rule", "body": "Backdrop blur is reserved for elements that overlay scrolling content (nav, bottom bar, chips on the hero photo). Cards and bands are opaque.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do let the photographs be the only colour; keep the page to greige, sheet, paper, white and charcoal ink.",
+      "Do open every section with the same head: h2 in columns 1–7, paragraph and optional action in columns 9–12, content 72px below.",
+      "Do step surfaces up the ladder (greige, sheet, paper, white) when something needs to separate; adjacent bands must differ.",
+      "Do use Source Sans 3 at 600 for anything that names or acts and 400 for anything that explains, with -0.025em / -0.018em tracking on display and headline sizes.",
+      "Do keep charcoal to objects (buttons, discs, one card per row, the Close panel) and keep the Close panel's 24px radius concentric with its 14px photo at a 24px inset.",
+      "Do use the one reveal (opacity plus 18px settle, 0.9s, cubic-bezier(0.16, 1, 0.3, 1), staggered by --d) for entering content and render it already settled under reduced motion.",
+      "Do put text over photographs only with the scrim (dark captions) or on a white caption card or pill.",
+      "Do draw icons as 1.5px round-capped line strokes in a 24px box in currentColor."
+    ],
+    "donts": [
+      "Don't add a box-shadow to anything, in any state.",
+      "Don't add a gradient other than the caption scrim, or tint, duotone or overlay a photograph.",
+      "Don't place an eyebrow, kicker, slash-label, numeral or any tracked-caps line above an h1 or h2.",
+      "Don't introduce a brand accent, a second typeface, a third weight, or a monospace face.",
+      "Don't make a full-bleed dark band; charcoal sits inside a light band as an object.",
+      "Don't use hard corners or a radius other than 8px, 14px, 24px (Close panel only), a pill or a circle.",
+      "Don't add blur or translucency to cards or bands; it is reserved for chrome that overlays scrolling content.",
+      "Don't add a second motion grammar (parallax, marquee, bouncing CTAs); the settle reveal, the self-drawing section, the 1.03 photo hover and the bottom-bar slide are the entire vocabulary."
+    ]
+  }
+}
