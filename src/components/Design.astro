@@ -124,6 +124,9 @@ const designs = await designPhotos();
     left: 16px;
     right: auto;
     bottom: 16px;
+    /* Shrink to the caption, but never past the card: long captions wrap
+       inside the pill instead of being clipped by the card's overflow. */
+    max-width: calc(100% - 32px);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -132,7 +135,12 @@ const designs = await designPhotos();
     color: var(--ink);
     border-radius: var(--r-pill);
   }
+  .card .cap .small {
+    min-width: 0;
+  }
   .tag {
+    flex: none;
+    white-space: nowrap;
     padding: 5px 10px;
     border-radius: var(--r-pill);
     background: var(--ink);
@@ -159,6 +167,7 @@ const designs = await designPhotos();
     .card .cap {
       left: 12px;
       bottom: 12px;
+      max-width: calc(100% - 24px);
     }
   }
 </style>

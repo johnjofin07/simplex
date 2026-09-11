@@ -16,7 +16,7 @@ import { site } from '../content/site';
       {site.why.stats.map((s, i) => (
         <div data-reveal style={`--d: ${0.06 * i}s`}>
           <dd class="value">
-            <span class="num"><span class="digits" data-count={parseInt(s.value, 10)} style={`--w: ${String(parseInt(s.value, 10)).length}ch`}>{parseInt(s.value, 10)}</span>{s.value.replace(/^\d+/, '')}</span>
+            <span class="num"><span class="digits" data-count={parseInt(s.value, 10)}>{parseInt(s.value, 10)}</span>{s.value.replace(/^\d+/, '')}</span>
             <span class="unit">{s.unit}</span>
           </dd>
           <dt class="small muted">{s.text}</dt>
@@ -73,10 +73,9 @@ import { site } from '../content/site';
     letter-spacing: -0.02em;
     font-variant-numeric: tabular-nums;
   }
-  /* Reserve the final digit count so the unit does not drift while the number counts up. */
+  /* Inline-block so the counter script can hold the final width while the number counts up. */
   .digits {
     display: inline-block;
-    min-inline-size: var(--w);
   }
   .unit {
     font-size: var(--small-size);
@@ -159,7 +158,7 @@ import { site } from '../content/site';
       gap: 12px;
     }
   }
-  @media (max-width: 400px) {
+  @media (max-width: 560px) {
     .stats,
     .points {
       grid-template-columns: 1fr;

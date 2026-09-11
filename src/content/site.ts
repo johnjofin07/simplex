@@ -32,7 +32,8 @@ export type IconName =
   | 'arrow'
   | 'arrow-left'
   | 'close'
-  | 'photos';
+  | 'photos'
+  | 'menu';
 
 export const site = {
   name: 'Simplex Aluminium',
@@ -65,8 +66,8 @@ export const site = {
   serviceArea: 'All of Kerala',
 
   nav: [
-    { href: '#work', label: 'Work' },
     { href: '#why', label: 'Why us' },
+    { href: '#work', label: 'Gallery' },
     { href: '#process', label: 'Process' },
     { href: '#design', label: '3D design' },
     { href: '#contact', label: 'Contact' },

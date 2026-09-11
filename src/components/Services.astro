@@ -46,7 +46,7 @@ const cards = await Promise.all(
               src={s.cover.src}
               alt={s.cover.alt}
               widths={[480, 800, 1200, 1600]}
-              sizes={s.span === 'full' ? '(max-width: 1440px) 100vw, 1440px' : s.span === 'wide' ? '(max-width: 720px) 100vw, 60vw' : '(max-width: 720px) 100vw, 34vw'}
+              sizes={s.span === 'full' ? '(max-width: 1440px) 100vw, 1440px' : s.span === 'wide' ? '(max-width: 720px) 100vw, 60vw' : '(max-width: 900px) 100vw, 34vw'}
               format="webp"
               quality={76}
               loading="lazy"
@@ -168,14 +168,20 @@ const cards = await Promise.all(
     .narrow .card {
       aspect-ratio: 4 / 3;
     }
+    /* Three square cards stay in one row so none is left alone on a row. */
     .third {
-      grid-column: span 6;
-    }
-    .third:last-of-type {
-      grid-column: span 6;
+      grid-column: span 4;
     }
     .full .card {
       aspect-ratio: 16 / 9;
+    }
+  }
+  @media (max-width: 900px) {
+    .third {
+      grid-column: 1 / -1;
+    }
+    .third .card {
+      aspect-ratio: 16 / 10;
     }
   }
   @media (max-width: 720px) {

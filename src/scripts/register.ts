@@ -42,6 +42,8 @@ if (counters.length && 'IntersectionObserver' in window && !reduced) {
       el.textContent = String(Math.round(easeOut(p) * end));
       if (p < 1) requestAnimationFrame(tick);
     };
+    // Hold the final width so the unit beside it does not drift as digits fill in.
+    el.style.minWidth = `${el.getBoundingClientRect().width}px`;
     el.textContent = '0';
     window.setTimeout(() => requestAnimationFrame(tick), delay);
   };
@@ -197,4 +199,28 @@ if (lb && typeof lb.showModal === 'function') {
     img.removeAttribute('src');
     opener?.focus();
   });
+}
+
+/* ---------- Mobile menu: the section links live behind one button under 1040px ---------- */
+const menuBtn = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+const menu = document.querySelector<HTMLElement>('[data-menu]');
+if (menuBtn && menu) {
+  const setOpen = (open: boolean) => {
+    menu.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', String(open));
+    document.documentElement.classList.toggle('menu-open', open);
+  };
+  menuBtn.addEventListener('click', () => setOpen(menu.hidden));
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu.hidden) {
+      setOpen(false);
+      menuBtn.focus();
+    }
+  });
+  document.addEventListener('click', (e) => {
+    const t = e.target as Node;
+    if (!menu.hidden && !menu.contains(t) && !menuBtn.contains(t)) setOpen(false);
+  });
+  window.matchMedia('(min-width: 1041px)').addEventListener('change', (m) => m.matches && setOpen(false));
 }

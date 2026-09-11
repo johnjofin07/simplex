@@ -71,10 +71,12 @@ const year = new Date().getFullYear();
   }
   .links {
     display: flex;
-    gap: 24px;
+    flex-wrap: wrap;
+    gap: 8px 24px;
   }
   .links a {
     font-weight: 600;
+    white-space: nowrap;
   }
   .contact {
     align-items: flex-start;

@@ -1,5 +1,6 @@
 ---
 import Button from './Button.astro';
+import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 import { site, telHref, waHref } from '../content/site';
 ---
@@ -16,8 +17,16 @@ import { site, telHref, waHref } from '../content/site';
     <div class="actions">
       <Button href={waHref} variant="ghost" icon="whatsapp" class="desktop-only">WhatsApp</Button>
       <Button href={telHref} variant="primary" icon="phone">Call now</Button>
+      <button class="menu-btn mobile-only" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu" aria-label="Sections menu">
+        <Icon name="menu" size={22} class="ico-open" />
+        <Icon name="close" size={22} class="ico-close" />
+      </button>
     </div>
   </div>
+  <nav class="menu mobile-only" id="menu" data-menu hidden aria-label="Sections">
+    {site.nav.map((l) => <a href={l.href}>{l.label}</a>)}
+    <a class="wa" href={waHref} target="_blank" rel="noopener"><Icon name="whatsapp" size={18} /> WhatsApp us</a>
+  </nav>
 </header>
 
 <style>
@@ -58,6 +67,7 @@ import { site, telHref, waHref } from '../content/site';
     font-size: 16px;
     font-weight: 600;
     padding-block: 6px;
+    white-space: nowrap;
   }
   .links a::after {
     content: '';
@@ -81,10 +91,66 @@ import { site, telHref, waHref } from '../content/site';
     gap: 8px;
     align-items: center;
   }
-  @media (max-width: 720px) {
+  .menu-btn,
+  .menu {
+    display: none;
+  }
+  @media (max-width: 1040px) {
     .row {
       grid-template-columns: 1fr auto;
     }
+    .menu-btn {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+    }
+    .menu-btn :global(.ico-close),
+    .menu-btn[aria-expanded='true'] :global(.ico-open) {
+      display: none;
+    }
+    .menu-btn[aria-expanded='true'] :global(.ico-close) {
+      display: block;
+    }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      padding: 8px var(--margin) 16px;
+      background: color-mix(in srgb, var(--paper) 96%, transparent);
+      backdrop-filter: saturate(140%) blur(12px);
+      -webkit-backdrop-filter: saturate(140%) blur(12px);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 16px 40px rgba(20, 21, 19, 0.12);
+    }
+    .menu[hidden] {
+      display: none;
+    }
+    .menu :global(a) {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 0;
+      font-size: 18px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--line);
+    }
+    .menu :global(a:last-child) {
+      border-bottom: 0;
+    }
+    .menu .wa {
+      margin-top: 8px;
+      padding: 12px 0 4px;
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 720px) {
     .brand {
       gap: 10px;
     }
