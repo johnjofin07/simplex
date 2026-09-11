@@ -107,6 +107,12 @@ collections:
 - **3D designs**: photo, caption, order. Photos land in
   `src/assets/photos/designs/`.
 
+The Assets tab lists one folder per collection, so every card's photos appear
+together under "Gallery cards". The per-card folders below it come from
+`asset_collections` in `public/admin/config.yml`, which is a hand-written list:
+add a new card there to get its own folder in that tab. Photos still upload
+from inside the card itself either way.
+
 Saving commits the YAML entry and the image into the repo, which triggers the
 GitHub Pages build. Phone photos are resized to 2400 px WebP in the browser
 before upload (`media_libraries` in `public/admin/config.yml`), and Astro

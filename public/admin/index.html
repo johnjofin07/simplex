@@ -6,9 +6,89 @@
     <meta name="robots" content="noindex" />
     <title>Simplex Aluminium — photo admin</title>
     <link rel="icon" href="../favicon.ico" />
+    <style>
+      /* Splash shown while the Sveltia script downloads and boots. Plain HTML
+         so it paints before any JavaScript runs; removed once Sveltia mounts. */
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 2147483647;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.25rem;
+        background: #fff;
+        color: #111;
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        transition: opacity 0.35s ease;
+      }
+      #splash.is-done {
+        opacity: 0;
+        pointer-events: none;
+      }
+      #splash img {
+        width: min(60vw, 260px);
+        height: auto;
+        animation: splash-pulse 1.6s ease-in-out infinite;
+      }
+      #splash p {
+        margin: 0;
+        font-size: 0.875rem;
+        letter-spacing: 0.04em;
+        opacity: 0.6;
+      }
+      @keyframes splash-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.35; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #splash img { animation: none; }
+        #splash { transition: none; }
+      }
+    </style>
   </head>
   <body>
+    <div id="splash" role="status" aria-live="polite">
+      <img src="splash.jpg" alt="" width="884" height="884" />
+      <p>Loading photo admin…</p>
+    </div>
+
     <!-- Sveltia CMS: Git-based admin, saves straight to the GitHub repo. Config in config.yml next to this file. -->
     <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+    <script>
+      (function () {
+        var splash = document.getElementById("splash");
+        if (!splash) return;
+
+        function done() {
+          if (splash.classList.contains("is-done")) return;
+          splash.classList.add("is-done");
+          setTimeout(function () { splash.remove(); }, 400);
+          observer.disconnect();
+        }
+
+        // Sveltia renders its app into <body>; the first element it adds is
+        // our cue that the UI is up.
+        var observer = new MutationObserver(function (records) {
+          for (var i = 0; i < records.length; i++) {
+            var added = records[i].addedNodes;
+            for (var j = 0; j < added.length; j++) {
+              var node = added[j];
+              if (node.nodeType === 1 && node !== splash && node.tagName !== "SCRIPT") {
+                done();
+                return;
+              }
+            }
+          }
+        });
+        observer.observe(document.body, { childList: true });
+
+        // Safety nets: never leave the splash stuck over a broken or slow load.
+        var cms = document.querySelector('script[src*="sveltia-cms"]');
+        if (cms) cms.addEventListener("error", done);
+        setTimeout(done, 15000);
+      })();
+    </script>
   </body>
 </html>

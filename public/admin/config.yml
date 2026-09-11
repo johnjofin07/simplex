@@ -32,6 +32,31 @@ media_libraries:
           width: 2400
           height: 2400
 
+# The asset library sidebar lists one folder per collection, so all the gallery
+# card photos would otherwise sit together under "Gallery cards". These entries
+# add one browsable folder per card. Add a line here when you add a new card;
+# until then its photos still show up under "Gallery cards" and can be uploaded
+# from inside the card itself.
+asset_collections:
+  - name: glazing
+    label: Glazing and ACP facades
+    media_folder: /src/assets/photos/glazing
+  - name: windows
+    label: Windows and doors
+    media_folder: /src/assets/photos/windows
+  - name: wardrobes
+    label: Cupboards and wardrobes
+    media_folder: /src/assets/photos/wardrobes
+  - name: kitchens
+    label: Kitchens
+    media_folder: /src/assets/photos/kitchens
+  - name: interiors
+    label: Interiors and partitions
+    media_folder: /src/assets/photos/interiors
+  - name: porches
+    label: Car porches and roofing
+    media_folder: /src/assets/photos/porches
+
 editor:
   preview: false
 

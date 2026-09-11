@@ -159,13 +159,17 @@ const building = photos[site.hero.building];
     }
   }
   @media (max-width: 720px) {
+    /* Shorter hero on phones: the copy sits at the top and the building
+       follows straight after it. The cutout is shown at about twice the
+       viewport width so several bays of the sawtooth are in frame; the
+       1100px crop showed a bay and a half, which read as a broken image. */
     .hero {
-      min-height: min(88vh, 820px);
-      padding-top: 64px;
+      min-height: 0;
+      padding-top: 48px;
     }
     .fg {
-      width: 1100px;
-      padding-top: 40px;
+      width: max(100%, 760px);
+      padding-top: 28px;
     }
     .aside {
       grid-column: 1 / -1;
