@@ -1,5 +1,6 @@
 ---
 import '@fontsource-variable/source-sans-3/wght.css';
+import displayFont from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
 import '../styles/tokens.css';
 import '../styles/global.css';
 import { site } from '../content/site';
@@ -47,6 +48,7 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
     <meta name="theme-color" content="#e3e3de" />
     <link rel="icon" href={`${base}favicon.ico`} sizes="48x48" />
     <link rel="icon" href={`${base}favicon-32.png`} type="image/png" sizes="32x32" />

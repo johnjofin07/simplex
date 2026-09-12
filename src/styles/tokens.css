@@ -1,6 +1,6 @@
 /* Simplex Aluminium design tokens.
    Greige page, off-white sheets, white cards, charcoal ink. Photographs carry
-   every other colour. One humanist sans at two weights. */
+   every other colour. Geometric display titles paired with humanist body copy. */
 :root {
   /* Colour */
   --greige: #e3e3de;
@@ -16,12 +16,13 @@
 
   /* Type */
   --font: 'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif;
-  --display-size: clamp(42px, 5.3vw, 78px);
-  --display-lh: 1.02;
-  --display-track: -0.025em;
+  --font-display: 'Manrope Variable', 'Helvetica Neue', Arial, sans-serif;
+  --display-size: clamp(40px, 5.1vw, 74px);
+  --display-lh: 1.08;
+  --display-track: -0.05em;
   --h2-size: clamp(32px, 3.7vw, 54px);
-  --h2-lh: 1.08;
-  --h2-track: -0.018em;
+  --h2-lh: 1.12;
+  --h2-track: -0.04em;
   --h3-size: 22px;
   --body-size: 18px;
   --body-lh: 27px;

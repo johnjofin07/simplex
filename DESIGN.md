@@ -1,6 +1,6 @@
 ---
 name: Simplex Aluminium
-description: A greige product-company page for an aluminium fabricator; untinted photographs carry every colour, one humanist sans at two weights carries every word.
+description: A greige product-company page for an aluminium fabricator; untinted photographs carry every colour, geometric display titles pair with humanist body copy.
 colors:
   greige: "#e3e3de"
   sheet: "#f1f1ed"
@@ -14,17 +14,17 @@ colors:
   on-ink-2: "#b9bab5"
 typography:
   display:
-    fontFamily: "'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif"
-    fontSize: "clamp(42px, 5.3vw, 78px)"
-    fontWeight: 600
-    lineHeight: 1.02
-    letterSpacing: "-0.025em"
-  headline:
-    fontFamily: "'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif"
-    fontSize: "clamp(32px, 3.7vw, 54px)"
-    fontWeight: 600
+    fontFamily: "'Manrope Variable', 'Helvetica Neue', Arial, sans-serif"
+    fontSize: "clamp(40px, 5.1vw, 74px)"
+    fontWeight: 500
     lineHeight: 1.08
-    letterSpacing: "-0.018em"
+    letterSpacing: "-0.05em"
+  headline:
+    fontFamily: "'Manrope Variable', 'Helvetica Neue', Arial, sans-serif"
+    fontSize: "clamp(32px, 3.7vw, 54px)"
+    fontWeight: 500
+    lineHeight: 1.12
+    letterSpacing: "-0.04em"
   title:
     fontFamily: "'Source Sans 3 Variable', 'Source Sans Fallback', 'Segoe UI', Helvetica, Arial, sans-serif"
     fontSize: "22px"
@@ -176,13 +176,13 @@ components:
 
 Simplex is presented the way a logistics product company presents its containers: one large, untinted photograph of the glazing itself under a plain headline, then photo-led panels for each service. The page itself is a quiet greige ground with three off-white steps and white cards; it has no accent hue at all. Every chromatic value on the page comes from a photograph, and the photographs are shown as they were taken. The charcoal ink does all the pointing: it is the text, the buttons, the icon discs, one dark card in a row, and the closing panel.
 
-Density is generous and grid-led. Sections are long bands (128px of vertical padding at desktop) headed by a single h2 on the left seven columns and a short paragraph, sometimes with a button or a control, on the right four. There are no eyebrow labels, kickers or section numbers above headings: each zone is named by its literal noun in the heading and nothing else. Hierarchy is carried by one humanist sans, Source Sans 3, at exactly two weights, 600 for anything that names or acts and 400 for anything that explains.
+Density is generous and grid-led. Sections are long bands (128px of vertical padding at desktop) headed by a single h2 on the left seven columns and a short paragraph, sometimes with a button or a control, on the right four. There are no eyebrow labels, kickers or section numbers above headings: each zone is named by its literal noun in the heading and nothing else. Hierarchy pairs Manrope at 500 for large titles with Source Sans 3 at 600 for smaller headings and controls and 400 for explanatory copy.
 
 The world rejects the fabricator default it was built against: no dark facade hero, no orange quote button, no icon-tile services, no box-shadows, no gradients except the scrim that makes photo captions legible. Depth is tonal (greige, sheet, paper, white) and linear (1px rules). Motion is a single grammar: content settles upward 18px as it enters, the technical section drawing draws itself along its real path lengths, and under reduced motion everything is simply already there.
 
 **Key Characteristics:**
 - Four flat neutral surfaces (greige, sheet, paper, white) and one charcoal ink; photographs supply every other colour.
-- One typeface, two weights (600 / 400); tight negative tracking at display sizes, no tracked caps above headings.
+- Manrope display titles with Source Sans 3 body and controls; tight negative tracking at display sizes, no tracked caps above headings.
 - 12-column grid inside a 1440px wrap; section heads split 7 / 4; content sits 72px below the head.
 - Rounded photo panels and cards (14px), pill buttons, circular icon discs, a 24px closing panel; no shadows anywhere.
 - One 1.5px-stroke line-icon set drawn in a 24px box, always in ink or its inverse.
@@ -215,11 +215,11 @@ A warm neutral ladder from greige to white with a single charcoal ink; there is 
 
 ## Typography
 
-**Display Font:** Source Sans 3 Variable (self-hosted via `@fontsource-variable/source-sans-3`; fallback "Source Sans Fallback", a size-adjusted local Helvetica Neue / Arial face at 101% with 96% / 26% ascent and descent overrides, then Segoe UI, Helvetica, Arial)
+**Display Font:** Manrope Variable, self-hosted via `@fontsource-variable/manrope` (Latin subset), at weight 500; fallback Helvetica Neue, Arial, sans-serif.
 **Body Font:** the same family
 **Label Font:** the same family; no monospace, no second face
 
-**Character:** One humanist sans at two weights. Everything that names or acts (headings, wordmark, buttons, nav links, card titles, chip text, step numerals, definition terms) is 600; everything that explains is 400. Display and headline sizes are tracked tight (-0.025em / -0.018em) with line-heights near 1; body sits at 18/27px.
+**Character:** Geometric, medium-weight large titles give the photography an architectural feel. Display and section headlines use Manrope 500 with -0.05em / -0.04em tracking and 1.08 / 1.12 line heights. Source Sans 3 retains clear smaller headings and controls at 600, and body copy at 400 and 18/27px.
 
 ### Hierarchy
 - **Display** (600, clamp(42px, 5.3vw, 78px), 1.02, -0.025em): the hero h1 only. Balanced wrapping, left eight columns at desktop.
@@ -232,7 +232,7 @@ A warm neutral ladder from greige to white with a single charcoal ink; there is 
 - **Wordmark** (600, 22px, 0.06em, uppercase; 19px mobile, 18px footer): the "/SIMPLEX" mark in nav and footer.
 
 ### Named Rules
-**The Two Weights Rule.** 600 names and acts; 400 explains. No other weight is loaded or used, and no italic exists.
+**Type hierarchy.** Manrope 500 carries large titles; Source Sans 3 at 600 names and acts, and 400 explains. No italic is used.
 
 **The Headline-Alone Rule.** No eyebrow, kicker, slash-label or numeral sits above an h2 or h1 (user decision 2026-09-11). Sections are carried by the heading noun and the paragraph beside it.
 
@@ -332,7 +332,7 @@ Three columns above a `{colors.line-dark}` rule inside the charcoal panel: label
 - **Do** let the photographs be the only colour; keep the page to greige, sheet, paper, white and charcoal ink.
 - **Do** open every section with the same head: h2 in columns 1–7, paragraph and optional action in columns 9–12, content 72px below.
 - **Do** step surfaces up the ladder (greige, sheet, paper, white) when something needs to separate; adjacent bands must differ.
-- **Do** use Source Sans 3 at 600 for anything that names or acts and 400 for anything that explains, with -0.025em / -0.018em tracking on display and headline sizes.
+- **Do** use Manrope 500 for display and section headlines with -0.05em / -0.04em tracking; Source Sans 3 600 for smaller headings and controls, and 400 for body copy.
 - **Do** keep charcoal to objects (buttons, discs, one card per row, the Close panel) and keep the Close panel's 24px radius concentric with its 14px photo at a 24px inset.
 - **Do** use the one reveal (opacity plus 18px settle, 0.9s, `cubic-bezier(0.16, 1, 0.3, 1)`, staggered by `--d`) for entering content and render it already settled under reduced motion.
 - **Do** put text over photographs only with the scrim (dark captions) or on a white caption card or pill.
@@ -342,7 +342,7 @@ Three columns above a `{colors.line-dark}` rule inside the charcoal panel: label
 - **Don't** add a box-shadow to anything, in any state.
 - **Don't** add a gradient other than the caption scrim, or tint, duotone or overlay a photograph.
 - **Don't** place an eyebrow, kicker, slash-label, numeral or any tracked-caps line above an h1 or h2.
-- **Don't** introduce a brand accent, a second typeface, a third weight, or a monospace face.
+- **Don't** introduce a brand accent, additional typefaces, or a monospace face.
 - **Don't** make a full-bleed dark band; charcoal sits inside a light band as an object.
 - **Don't** use hard corners or a radius other than 8px, 14px, 24px (Close panel only), a pill or a circle.
 - **Don't** add blur or translucency to cards or bands; it is reserved for chrome that overlays scrolling content.
