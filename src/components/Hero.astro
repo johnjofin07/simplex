@@ -1,8 +1,9 @@
 ---
 /**
- * First screen. Three layers (register.ts sets --py and --ty): the sky at the
- * back and the headline in the middle linger as you scroll, while the building
- * cutout in front moves with the page, so it rises up over the text.
+ * First screen. Three layers: the sky at the back and the headline in the
+ * middle linger as you scroll, while the building cutout in front moves with
+ * the page, so it rises up over the text. The drift is a CSS scroll-driven
+ * animation; register.ts only steps in on browsers without one.
  */
 import { Image } from 'astro:assets';
 import Button from './Button.astro';
@@ -57,7 +58,7 @@ const building = photos[site.hero.building];
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-block: 225px 32px;
+    padding-block: 200px 32px;
     background: var(--paper);
     overflow: hidden;
   }
@@ -89,8 +90,12 @@ const building = photos[site.hero.building];
     transform: translate3d(-50%, 0, 0);
     pointer-events: none;
   }
-  /* Parallax: the sky moves at 0.3x and the text at 0.4x of the scroll speed,
-     so the building (1x) climbs over both. Static under reduced motion. */
+  /* Parallax: the sky and the text drift down as you scroll, so the building
+     (which moves with the page) climbs over both. A scroll timeline keeps the
+     drift locked to the scroll on the compositor; driving it from a scroll
+     listener instead leaves the transform a frame behind the page, which reads
+     as the text vibrating. register.ts only falls back to that listener where
+     there is no scroll timeline. Static under reduced motion. */
   :global(html.js) .bg {
     transform: translate3d(0, var(--py, 0px), 0);
     will-change: transform;
@@ -99,10 +104,32 @@ const building = photos[site.hero.building];
     transform: translate3d(0, var(--ty, 0px), 0);
     will-change: transform;
   }
+  @keyframes drift {
+    to {
+      transform: translate3d(0, var(--drift), 0);
+    }
+  }
+  @supports (animation-timeline: scroll()) {
+    :global(html.js) .bg,
+    :global(html.js) .top {
+      animation-name: drift;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 100vh;
+    }
+    :global(html.js) .bg {
+      --drift: 70vh;
+    }
+    :global(html.js) .top {
+      --drift: 60vh;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     :global(html.js) .bg,
     :global(html.js) .top {
       transform: none;
+      animation: none;
       will-change: auto;
     }
   }

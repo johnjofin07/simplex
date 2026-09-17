@@ -94,17 +94,18 @@ document.querySelectorAll<HTMLElement>('[data-scroller-controls]').forEach((ctl)
   sync();
 });
 
-/* ---------- Hero parallax: sky and text linger (0.3x / 0.4x), the building cutout rises at 1x ---------- */
+/* ---------- Hero parallax: sky and text linger, the building cutout rises with the page ----------
+   Hero.astro runs the drift off a CSS scroll timeline, which the browser keeps locked to the
+   scroll on the compositor. Only browsers without one land here, where the transform is a frame
+   behind the page; whole-pixel offsets keep the type from shimmering as it lags. */
 const hero = document.querySelector<HTMLElement>('[data-parallax]');
-if (hero && !reduced) {
+if (hero && !reduced && !CSS.supports('animation-timeline: scroll()')) {
   let ticking = false;
   const update = () => {
     ticking = false;
-    const y = window.scrollY;
-    const limit = hero.offsetHeight;
-    const t = Math.min(y, limit);
-    hero.style.setProperty('--py', `${t * 0.7}px`);
-    hero.style.setProperty('--ty', `${t * 0.6}px`);
+    const t = Math.min(window.scrollY, hero.offsetHeight);
+    hero.style.setProperty('--py', `${Math.round(t * 0.7)}px`);
+    hero.style.setProperty('--ty', `${Math.round(t * 0.6)}px`);
   };
   window.addEventListener(
     'scroll',
